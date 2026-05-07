@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1q4vo48" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Web Modeler" exporterVersion="a89018a" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.9.0">
+  <decision id="Decision_0b6xezd" name="Risk Factor">
+    <informationRequirement id="InformationRequirement_173o2w5">
+      <requiredInput href="#InputData_1s44d28" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_18k5pc0">
+      <requiredDecision href="#Decision_1la1b50" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_06oayt4">
+      <input id="Input_1" label="Car Type">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1b215u2" label="Driver Experience (in years)">
+        <inputExpression id="LiteralExpression_0478j1t" typeRef="number">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Risk Factor" typeRef="number" />
+      <rule id="DecisionRule_1u37n4e">
+        <inputEntry id="UnaryTests_008xyf5">
+          <text>"luxury car"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0gcweh9">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0xob6jm">
+          <text>5</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ycjlrt">
+        <inputEntry id="UnaryTests_0dk0xe4">
+          <text>not("scrap car")</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1awf96k">
+          <text>&lt;3</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_07thheb">
+          <text>5</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0fre17j">
+        <inputEntry id="UnaryTests_1mvke4k">
+          <text>"family"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dzm2vq">
+          <text>&gt;3</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1kscid3">
+          <text>2</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_09qujsr">
+        <inputEntry id="UnaryTests_0s6shms">
+          <text>"sports car"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0bjpwlm">
+          <text>[3..5]</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18ohdm6">
+          <text>3</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0jvsg8p">
+        <inputEntry id="UnaryTests_0t4ksas">
+          <text>"sports car"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05ed4pn">
+          <text>&gt;5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1o0ivi8">
+          <text>2</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_00x50xv">
+        <inputEntry id="UnaryTests_0bj6ggs">
+          <text>"scrap car"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15kg77o">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_096lxj6">
+          <text>1</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="Decision_1la1b50" name="Car Type">
+    <informationRequirement id="InformationRequirement_13sr59q">
+      <requiredInput href="#InputData_036a06o" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0m1b5cn">
+      <requiredInput href="#InputData_0eke1af" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0b7orwz">
+      <input id="InputClause_0u4fbv9" label="Price">
+        <inputExpression id="LiteralExpression_1mnm119" typeRef="number" />
+      </input>
+      <input id="InputClause_1gg5ads" label="Horsepower">
+        <inputExpression id="LiteralExpression_1r76l7m" typeRef="number">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_0lfwudx" label="Car Type" typeRef="string" />
+      <rule id="DecisionRule_057j0ep">
+        <inputEntry id="UnaryTests_0q4thp0">
+          <text>&gt;200000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0r5h06v">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0wcx7z2">
+          <text>"luxury car"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0whnb45">
+        <inputEntry id="UnaryTests_1pu0olg">
+          <text>&lt;5000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vifwv8">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1hwufb9">
+          <text>"scrap car"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0uoha8j">
+        <inputEntry id="UnaryTests_1p7swfc">
+          <text>[5000..200000]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1sea5lf">
+          <text>&gt;120</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_117l04a">
+          <text>"sport car"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0uq955q">
+        <inputEntry id="UnaryTests_08xzeti">
+          <text>[5000..200000]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rnsw6l">
+          <text>&lt;120</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1wp42zk">
+          <text>"family car"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_1s44d28" name="Years of Experience" />
+  <inputData id="InputData_036a06o" name="Price" />
+  <inputData id="InputData_0eke1af" name="Power" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_0b6xezd">
+        <dc:Bounds height="80" width="180" x="290" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0vwa7u8" dmnElementRef="Decision_1la1b50">
+        <dc:Bounds height="80" width="180" x="440" y="250" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_196aeg2" dmnElementRef="InputData_1s44d28">
+        <dc:Bounds height="45" width="125" x="158" y="278" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1n9kpfh" dmnElementRef="InformationRequirement_173o2w5">
+        <di:waypoint x="221" y="278" />
+        <di:waypoint x="350" y="200" />
+        <di:waypoint x="350" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0sli1l8" dmnElementRef="InformationRequirement_18k5pc0">
+        <di:waypoint x="530" y="250" />
+        <di:waypoint x="410" y="200" />
+        <di:waypoint x="410" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0lft1ua" dmnElementRef="InputData_036a06o">
+        <dc:Bounds height="45" width="125" x="388" y="418" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0npaxt1" dmnElementRef="InformationRequirement_13sr59q">
+        <di:waypoint x="451" y="418" />
+        <di:waypoint x="500" y="350" />
+        <di:waypoint x="500" y="330" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_15fnkh8" dmnElementRef="InputData_0eke1af">
+        <dc:Bounds height="45" width="125" x="578" y="419" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1fo2ha2" dmnElementRef="InformationRequirement_0m1b5cn">
+        <di:waypoint x="641" y="419" />
+        <di:waypoint x="560" y="350" />
+        <di:waypoint x="560" y="330" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
