@@ -1,0 +1,67 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.6.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "35a6d3d"
+  },
+  "schemaVersion": 16,
+  "id": "review-loan-request-1woqd8d",
+  "components": [
+    {
+      "label": "Loan",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1cgzvpf",
+        "columns": null
+      },
+      "id": "Field_1u275m0",
+      "key": "loan",
+      "readonly": true
+    },
+    {
+      "label": "Duration in month",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0ohda51",
+        "columns": null
+      },
+      "id": "Field_0inl92i",
+      "key": "durationInMonth",
+      "readonly": true
+    },
+    {
+      "label": "Monthly rate",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0geooe3",
+        "columns": null
+      },
+      "id": "Field_1f7jryl",
+      "key": "monthlyRate",
+      "readonly": true
+    },
+    {
+      "label": "Reason for loan",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_08gsekc",
+        "columns": null
+      },
+      "id": "Field_15geeuy",
+      "key": "reason",
+      "readonly": true
+    },
+    {
+      "label": "Accept Loan?",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_049yv0s",
+        "columns": null
+      },
+      "id": "Field_0lvdecp",
+      "key": "loanAccepted"
+    }
+  ],
+  "type": "default"
+}

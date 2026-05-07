@@ -1,0 +1,161 @@
+{
+  "processId": "Process_1hnk6le",
+  "testCases": [
+    {
+      "name": "loan accepted",
+      "instructions": [
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "Process_1hnk6le"
+          },
+          "variables": {
+            "loan": 15000,
+            "reason": "I want to buy a new car",
+            "durationInMonth": 36
+          }
+        },
+        {
+          "type": "COMPLETE_USER_TASK",
+          "userTaskSelector": {
+            "elementId": "Activity_1mniuc6"
+          },
+          "variables": {
+            "loan": "15000",
+            "durationInMonth": "36",
+            "monthlyRate": "416.6666666666667",
+            "reason": "I want to buy a new car",
+            "loanAccepted": true
+          }
+        },
+        {
+          "type": "COMPLETE_JOB",
+          "jobSelector": {
+            "elementId": "Activity_1ifof0v"
+          }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "Process_1hnk6le"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ],
+      "metadata": {
+        "processInstanceId": 2251799813690350,
+        "coveredFlowNodes": [
+          {
+            "flowNodeId": "StartEvent_1",
+            "elementType": "bpmn:StartEvent"
+          },
+          {
+            "flowNodeId": "Activity_13mige0",
+            "elementType": "bpmn:ScriptTask"
+          },
+          {
+            "flowNodeId": "Activity_1mniuc6",
+            "elementType": "bpmn:UserTask"
+          },
+          {
+            "flowNodeId": "Gateway_0nm1kzm",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Activity_1ifof0v",
+            "elementType": "bpmn:SendTask"
+          },
+          {
+            "flowNodeId": "Event_0r8ioga",
+            "elementType": "bpmn:EndEvent"
+          }
+        ],
+        "coveredSequenceFlows": [
+          "Flow_16z11ys",
+          "Flow_1fksc1t",
+          "Flow_1a8zg8l",
+          "Flow_1js0lvm",
+          "Flow_03s0rkd"
+        ]
+      }
+    },
+    {
+      "name": "loan rejected",
+      "instructions": [
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "Process_1hnk6le"
+          },
+          "variables": {
+            "loan": 15000,
+            "reason": "I want to buy a new car",
+            "durationInMonth": 36
+          }
+        },
+        {
+          "type": "COMPLETE_USER_TASK",
+          "userTaskSelector": {
+            "elementId": "Activity_1mniuc6"
+          },
+          "variables": {
+            "loan": "15000",
+            "durationInMonth": "36",
+            "monthlyRate": "416.6666666666667",
+            "reason": "I want to buy a new car",
+            "loanAccepted": false
+          }
+        },
+        {
+          "type": "COMPLETE_JOB",
+          "jobSelector": {
+            "elementId": "Activity_0oh8vhy"
+          }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "Process_1hnk6le"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ],
+      "metadata": {
+        "processInstanceId": 2251799813690453,
+        "coveredFlowNodes": [
+          {
+            "flowNodeId": "StartEvent_1",
+            "elementType": "bpmn:StartEvent"
+          },
+          {
+            "flowNodeId": "Activity_13mige0",
+            "elementType": "bpmn:ScriptTask"
+          },
+          {
+            "flowNodeId": "Activity_1mniuc6",
+            "elementType": "bpmn:UserTask"
+          },
+          {
+            "flowNodeId": "Gateway_0nm1kzm",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Activity_0oh8vhy",
+            "elementType": "bpmn:SendTask"
+          },
+          {
+            "flowNodeId": "Event_1mglxmi",
+            "elementType": "bpmn:EndEvent"
+          }
+        ],
+        "coveredSequenceFlows": [
+          "Flow_16z11ys",
+          "Flow_1fksc1t",
+          "Flow_1a8zg8l",
+          "Flow_1b77qhi",
+          "Flow_1m4pn4d"
+        ]
+      }
+    }
+  ]
+}

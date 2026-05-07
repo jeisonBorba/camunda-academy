@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1odlovq" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Web Modeler" exporterVersion="fad8eda" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.7.0">
+  <decision id="dmn-task-0b6zr06" name="DMN task">
+    <decisionTable id="DecisionTable_0eb7p0u">
+      <input id="Input_1" label="processVariable">
+        <inputExpression id="InputExpression_1" typeRef="number">
+          <text>processVariable</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="dmnTableOutput" name="dmnTableOutput" typeRef="string" />
+      <rule id="DecisionRule_0y0miij">
+        <inputEntry id="UnaryTests_1ugptq3">
+          <text>0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1goz5p3">
+          <text>"Value 0"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1q8gz7k">
+        <inputEntry id="UnaryTests_1tc02ww">
+          <text>1</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0n7vmff">
+          <text>"Value 1"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0nogfl4">
+        <inputEntry id="UnaryTests_0j3d3xy">
+          <text>2</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_131coek">
+          <text>"Value 2"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0qt6uv5">
+        <inputEntry id="UnaryTests_1fyxyrz">
+          <text>&gt;=3</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1acd3y1">
+          <text>"Value &gt;= 3"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="dmn-task-0b6zr06">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
