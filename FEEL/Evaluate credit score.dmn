@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0yi4sxc" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Web Modeler" exporterVersion="a89018a" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.9.0">
+  <decision id="evaluate-credit-score-1v43vcr" name="Evaluate credit score">
+    <decisionTable id="DecisionTable_0tmhxnk">
+      <input id="Input_1" label="Credit Score">
+        <inputExpression id="InputExpression_1" typeRef="number">
+          <text>0.02 * monthlyIncome - amountChildren * 5</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Approval Status" name="approvalStatus" typeRef="string">
+        <outputValues id="UnaryTests_0r0nk43">
+          <text>"Approved","Rejected"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_10qpl6e">
+        <inputEntry id="UnaryTests_0u832vw">
+          <text>&lt;50</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_09s4rpu">
+          <text>"Rejected"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_02k40wp">
+        <inputEntry id="UnaryTests_0p2r9sf">
+          <text>&gt;50</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05nvyzi">
+          <text>"Approved"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="evaluate-credit-score-1v43vcr">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
