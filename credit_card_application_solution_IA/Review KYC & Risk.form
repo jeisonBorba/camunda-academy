@@ -1,0 +1,499 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "3543595"
+  },
+  "schemaVersion": 19,
+  "id": "Form_ReviewKYCRisk",
+  "components": [
+    {
+      "text": "# Review KYC & Risk",
+      "type": "text",
+      "layout": {
+        "row": "Row_1nvdu3h",
+        "columns": null
+      },
+      "id": "Field_1vw5qgm"
+    },
+    {
+      "text": "### Personal Information",
+      "type": "text",
+      "id": "Heading_0",
+      "layout": {
+        "row": "Row_1cfwvh9"
+      }
+    },
+    {
+      "label": "",
+      "components": [
+        {
+          "label": "Full Name",
+          "type": "textfield",
+          "id": "Textfield_1",
+          "validate": {
+            "minLength": 2,
+            "maxLength": 50,
+            "required": true
+          },
+          "key": "fullName",
+          "layout": {
+            "row": "Row_139kfuu"
+          },
+          "readonly": true
+        },
+        {
+          "subtype": "date",
+          "type": "datetime",
+          "id": "Date_2",
+          "dateLabel": "Date of Birth",
+          "validate": {
+            "required": true
+          },
+          "key": "dateOfBirth",
+          "layout": {
+            "row": "Row_139kfuu"
+          },
+          "readonly": true
+        },
+        {
+          "label": "Address",
+          "type": "textfield",
+          "id": "Textfield_3",
+          "validate": {
+            "minLength": 5,
+            "maxLength": 100,
+            "required": true
+          },
+          "key": "address",
+          "layout": {
+            "row": "Row_0sivrfe"
+          },
+          "readonly": true
+        },
+        {
+          "label": "City",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0h22iqa",
+            "columns": null
+          },
+          "id": "Field_15e5x9b",
+          "key": "city",
+          "readonly": true
+        },
+        {
+          "label": "Country",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0h22iqa",
+            "columns": null
+          },
+          "id": "Field_13k5b1z",
+          "key": "country",
+          "readonly": true
+        },
+        {
+          "label": "Email",
+          "type": "textfield",
+          "id": "Textfield_4",
+          "validate": {
+            "required": true,
+            "validationType": "email"
+          },
+          "key": "email",
+          "layout": {
+            "row": "Row_0gg5ruw"
+          },
+          "readonly": true
+        },
+        {
+          "text": "##### Identification Information",
+          "type": "text",
+          "id": "Subheading_5",
+          "layout": {
+            "row": "Row_01jm6j5"
+          }
+        },
+        {
+          "label": "National ID",
+          "type": "textfield",
+          "id": "Textfield_6",
+          "validate": {
+            "minLength": 9,
+            "maxLength": 20,
+            "required": true
+          },
+          "key": "nationalId",
+          "layout": {
+            "row": "Row_1vhl3ra"
+          },
+          "readonly": true
+        },
+        {
+          "text": "##### Employment and Financial Information",
+          "type": "text",
+          "id": "Subheading_9",
+          "layout": {
+            "row": "Row_01hum6u"
+          }
+        },
+        {
+          "label": "Employment Status",
+          "values": [
+            {
+              "value": "Employed",
+              "label": "Employed"
+            },
+            {
+              "value": "Unemployed",
+              "label": "Unemployed"
+            },
+            {
+              "value": "Self-employed",
+              "label": "Self-employed"
+            },
+            {
+              "value": "Student",
+              "label": "Student"
+            }
+          ],
+          "type": "select",
+          "id": "Select_10",
+          "validate": {
+            "required": true
+          },
+          "key": "employmentStatus",
+          "layout": {
+            "row": "Row_1uhx6xg",
+            "columns": null
+          },
+          "readonly": true
+        },
+        {
+          "label": "Annual Income",
+          "type": "number",
+          "id": "Number_11",
+          "decimalDigits": 2,
+          "defaultValue": 50000,
+          "validate": {
+            "min": 20000,
+            "max": 1000000,
+            "step": 1000,
+            "required": true
+          },
+          "key": "annualIncome",
+          "layout": {
+            "row": "Row_1uhx6xg",
+            "columns": null
+          },
+          "readonly": true
+        },
+        {
+          "label": "Net Worth",
+          "type": "number",
+          "id": "Number_12",
+          "decimalDigits": 2,
+          "defaultValue": 100000,
+          "validate": {
+            "min": 50000,
+            "max": 10000000,
+            "step": 1000,
+            "required": true
+          },
+          "key": "netWorth",
+          "layout": {
+            "row": "Row_1uhx6xg",
+            "columns": null
+          },
+          "readonly": true
+        }
+      ],
+      "showOutline": true,
+      "type": "group",
+      "layout": {
+        "row": "Row_1gv2vq7",
+        "columns": null
+      },
+      "id": "Field_1gzse0p",
+      "path": "normalizedKycData"
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_0e8ugoi",
+        "columns": null
+      },
+      "id": "Field_1tmycvy"
+    },
+    {
+      "text": "### Documentation",
+      "type": "text",
+      "layout": {
+        "row": "Row_1ieztuk",
+        "columns": null
+      },
+      "id": "Field_13c3w7s",
+      "conditional": {
+        "hide": "=kycdoc = null"
+      }
+    },
+    {
+      "label": "Submitted KYC Document preview",
+      "type": "documentPreview",
+      "layout": {
+        "row": "Row_0pqe68z",
+        "columns": null
+      },
+      "id": "Field_00cy05j",
+      "dataSource": "=kycdoc",
+      "conditional": {
+        "hide": "=kycdoc = null"
+      }
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_15ndjci",
+        "columns": null
+      },
+      "id": "Field_00jnd1v",
+      "conditional": {
+        "hide": "=kycdoc = null"
+      }
+    },
+    {
+      "text": "### Risk Analysis",
+      "type": "text",
+      "layout": {
+        "row": "Row_18hbvx1",
+        "columns": null
+      },
+      "id": "Field_09oelwu"
+    },
+    {
+      "label": "",
+      "components": [
+        {
+          "label": "Risk Level",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_120xgyq",
+            "columns": null
+          },
+          "id": "Field_1pvthv0",
+          "key": "overallRiskLevel",
+          "readonly": true
+        },
+        {
+          "text": "=\"*Risk Reason:* \" + overallRiskReason",
+          "type": "text",
+          "layout": {
+            "row": "Row_0ues3n0",
+            "columns": null
+          },
+          "id": "Field_04qwgj4"
+        },
+        {
+          "label": "Probability Of Default 12m",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0r2cjbf",
+            "columns": null
+          },
+          "id": "Field_0d6u8be",
+          "key": "probabilityOfDefault12m",
+          "readonly": true
+        },
+        {
+          "label": "Credit Score",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_0r2cjbf",
+            "columns": null
+          },
+          "id": "Field_0amsy4d",
+          "key": "creditScore",
+          "readonly": true
+        },
+        {
+          "label": "PEP",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_18i3oin",
+            "columns": null
+          },
+          "id": "Field_0y2mf9f",
+          "key": "pep",
+          "readonly": true
+        },
+        {
+          "label": "Sanctions Hit",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_18i3oin",
+            "columns": null
+          },
+          "id": "Field_00xscdi",
+          "key": "sanctionsHit",
+          "readonly": true
+        },
+        {
+          "label": "Risk Factors",
+          "components": [
+            {
+              "label": "Impact",
+              "type": "textfield",
+              "layout": {
+                "row": "Row_12sh9e6",
+                "columns": null
+              },
+              "id": "Field_0etaoec",
+              "key": "impact",
+              "readonly": true
+            },
+            {
+              "label": "Code",
+              "type": "textfield",
+              "layout": {
+                "row": "Row_12sh9e6",
+                "columns": null
+              },
+              "id": "Field_0la4j5g",
+              "key": "code",
+              "readonly": true
+            },
+            {
+              "label": "Description",
+              "type": "textfield",
+              "layout": {
+                "row": "Row_0k49grl",
+                "columns": null
+              },
+              "id": "Field_1ivso96",
+              "key": "description",
+              "readonly": true
+            },
+            {
+              "type": "separator",
+              "layout": {
+                "row": "Row_0r3w6zy",
+                "columns": null
+              },
+              "id": "Field_1pffpnl"
+            }
+          ],
+          "showOutline": true,
+          "isRepeating": true,
+          "allowAddRemove": false,
+          "defaultRepetitions": 1,
+          "type": "dynamiclist",
+          "layout": {
+            "row": "Row_1rt91a7",
+            "columns": null
+          },
+          "id": "Field_1409ebc",
+          "path": "riskFactors"
+        }
+      ],
+      "showOutline": true,
+      "type": "group",
+      "layout": {
+        "row": "Row_1qvhwdu",
+        "columns": null
+      },
+      "id": "Field_1ya1pbo",
+      "path": "riskAnalysis"
+    },
+    {
+      "text": "### Requested product",
+      "type": "text",
+      "layout": {
+        "row": "Row_1v3czt3",
+        "columns": null
+      },
+      "id": "Field_0n0tzyr"
+    },
+    {
+      "label": "",
+      "components": [
+        {
+          "label": "Product type",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_1yamkq9",
+            "columns": null
+          },
+          "id": "Field_0igxx1f",
+          "key": "productType",
+          "readonly": true
+        },
+        {
+          "label": "Card variant",
+          "type": "textfield",
+          "layout": {
+            "row": "Row_1yamkq9",
+            "columns": null
+          },
+          "id": "Field_0iu9oe0",
+          "key": "cardVariant",
+          "readonly": true
+        },
+        {
+          "label": "Requested limit",
+          "type": "number",
+          "layout": {
+            "row": "Row_1stcf1o",
+            "columns": null
+          },
+          "id": "Field_0u75ngy",
+          "key": "requestedLimit",
+          "readonly": true
+        }
+      ],
+      "showOutline": true,
+      "type": "group",
+      "layout": {
+        "row": "Row_08sjcf7",
+        "columns": null
+      },
+      "id": "Field_1w42d99",
+      "path": "productRequest"
+    },
+    {
+      "type": "separator",
+      "layout": {
+        "row": "Row_0c3wpu8",
+        "columns": null
+      },
+      "id": "Field_11zx7bn"
+    },
+    {
+      "label": "Approve",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_06913am",
+        "columns": null
+      },
+      "id": "Field_1kc94c3",
+      "key": "manualDecision"
+    },
+    {
+      "label": "Decision Reason",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1h25fdq",
+        "columns": null
+      },
+      "id": "Field_1qga4gr",
+      "key": "manualDecisionReason",
+      "conditional": {
+        "hide": "=manualDecision"
+      },
+      "description": "Internal only"
+    }
+  ],
+  "generated": true,
+  "type": "default"
+}

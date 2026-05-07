@@ -1,0 +1,130 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "3543595"
+  },
+  "schemaVersion": 19,
+  "id": "new-banking-product",
+  "components": [
+    {
+      "text": "### Request a new banking product\n\n*Choose the product you want, provide your details, and upload your identification and supporting documents to start your request.*",
+      "type": "text",
+      "layout": {
+        "row": "Row_0ilxgw4",
+        "columns": null
+      },
+      "id": "Field_0693sbp"
+    },
+    {
+      "label": "Product",
+      "components": [
+        {
+          "label": "Product type",
+          "values": [
+            {
+              "label": "Credit Card",
+              "value": "CREDIT_CARD"
+            }
+          ],
+          "type": "select",
+          "layout": {
+            "row": "Row_1kgpode",
+            "columns": null
+          },
+          "id": "Field_1xooak4",
+          "key": "productType"
+        },
+        {
+          "label": "Card variant",
+          "values": [
+            {
+              "label": "Visa Gold",
+              "value": "VISA_GOLD"
+            }
+          ],
+          "type": "select",
+          "layout": {
+            "row": "Row_1kgpode",
+            "columns": null
+          },
+          "id": "Field_1rgyyjt",
+          "key": "cardVariant",
+          "disabled": false,
+          "conditional": {
+            "hide": "=not(productRequest.productType = \"CREDIT_CARD\")"
+          },
+          "defaultValue": "VISA_GOLD",
+          "readonly": true
+        },
+        {
+          "label": "Requested credit limit",
+          "type": "number",
+          "layout": {
+            "row": "Row_13ajcge",
+            "columns": null
+          },
+          "id": "Field_16ij4za",
+          "key": "requestedLimit",
+          "defaultValue": 8000,
+          "conditional": {
+            "hide": "=not(productRequest.productType = \"CREDIT_CARD\")"
+          }
+        }
+      ],
+      "showOutline": true,
+      "type": "group",
+      "layout": {
+        "row": "Row_1kun4ub",
+        "columns": null
+      },
+      "id": "Field_0hr6m0i",
+      "path": "productRequest"
+    },
+    {
+      "label": "Upload Visa Gold credit card KYC document (ID + proof of income)",
+      "type": "filepicker",
+      "layout": {
+        "row": "Row_17yvx6h",
+        "columns": null
+      },
+      "id": "Field_1bkbyda",
+      "key": "kycdoc",
+      "accept": "pdf"
+    },
+    {
+      "label": "Select applicant profile",
+      "values": [
+        {
+          "label": "john",
+          "value": "john"
+        },
+        {
+          "label": "alex",
+          "value": "alex"
+        },
+        {
+          "label": "emma",
+          "value": "emma"
+        },
+        {
+          "label": "mia",
+          "value": "mia"
+        },
+        {
+          "label": "liam",
+          "value": "liam"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_1wjrfhb",
+        "columns": null
+      },
+      "id": "Field_159f6i3",
+      "key": "candidate"
+    }
+  ],
+  "type": "default"
+}
