@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_AssessRiskAndRouting" name="Risk Assessment &#38; Routing" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Web Modeler" exporterVersion="30fe6a4" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
+  <decision id="Decision_AssessRiskAndRouting" name="Assess risk and routing">
+    <decisionTable id="DecisionTable_RiskRouting" hitPolicy="FIRST">
+      <input id="Input_creditScore" label="creditScore">
+        <inputExpression id="InputExpression_creditScore" typeRef="number">
+          <text>riskAnalysis.creditScore</text>
+        </inputExpression>
+      </input>
+      <input id="Input_pd12m" label="probabilityOfDefault12m">
+        <inputExpression id="InputExpression_pd12m" typeRef="number">
+          <text>riskAnalysis.probabilityOfDefault12m</text>
+        </inputExpression>
+      </input>
+      <input id="Input_pep" label="pep" biodi:width="192">
+        <inputExpression id="InputExpression_pep" typeRef="boolean">
+          <text>riskAnalysis.pep</text>
+        </inputExpression>
+      </input>
+      <input id="Input_sanctionsHit" label="sanctionsHit">
+        <inputExpression id="InputExpression_sanctionsHit" typeRef="boolean">
+          <text>riskAnalysis.sanctionsHit</text>
+        </inputExpression>
+      </input>
+      <input id="Input_overallRiskLevel" label="overallRiskLevel">
+        <inputExpression id="InputExpression_overallRiskLevel" typeRef="string">
+          <text>riskAnalysis.overallRiskLevel</text>
+        </inputExpression>
+      </input>
+      <output id="Output_riskLevel" label="riskLevel" name="riskLevel" typeRef="string" />
+      <output id="Output_routingDecision" label="routingDecision" name="routingDecision" typeRef="string" />
+      <rule id="Rule_1_sanctions">
+        <inputEntry id="R1_In1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R1_In2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R1_In3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R1_In4">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="R1_In5">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="R1_Out1">
+          <text>"HIGH"</text>
+        </outputEntry>
+        <outputEntry id="R1_Out2">
+          <text>"REJECT"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_2_pep">
+        <inputEntry id="R2_In1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R2_In2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R2_In3">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="R2_In4">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="R2_In5">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="R2_Out1">
+          <text>"HIGH"</text>
+        </outputEntry>
+        <outputEntry id="R2_Out2">
+          <text>"MANUAL_REVIEW"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_3_pd_high">
+        <inputEntry id="R3_In1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R3_In2">
+          <text>&gt;= 0.12</text>
+        </inputEntry>
+        <inputEntry id="R3_In3">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="R3_In4">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="R3_In5">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="R3_Out1">
+          <text>"HIGH"</text>
+        </outputEntry>
+        <outputEntry id="R3_Out2">
+          <text>"REJECT"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_4_pd_medium_or_score_low">
+        <inputEntry id="R4_In1">
+          <text>&lt; 650</text>
+        </inputEntry>
+        <inputEntry id="R4_In2">
+          <text>[0.05..0.12)</text>
+        </inputEntry>
+        <inputEntry id="R4_In3">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="R4_In4">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="R4_In5">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="R4_Out1">
+          <text>"MEDIUM"</text>
+        </outputEntry>
+        <outputEntry id="R4_Out2">
+          <text>"MANUAL_REVIEW"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_5_overall_high">
+        <inputEntry id="R5_In1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R5_In2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R5_In3">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="R5_In4">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="R5_In5">
+          <text>"HIGH"</text>
+        </inputEntry>
+        <outputEntry id="R5_Out1">
+          <text>"HIGH"</text>
+        </outputEntry>
+        <outputEntry id="R5_Out2">
+          <text>"MANUAL_REVIEW"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_6_low_risk_auto">
+        <inputEntry id="R6_In1">
+          <text>&gt;= 680</text>
+        </inputEntry>
+        <inputEntry id="R6_In2">
+          <text>&lt; 0.05</text>
+        </inputEntry>
+        <inputEntry id="R6_In3">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="R6_In4">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="R6_In5">
+          <text>"LOW","MEDIUM"</text>
+        </inputEntry>
+        <outputEntry id="R6_Out1">
+          <text>"LOW"</text>
+        </outputEntry>
+        <outputEntry id="R6_Out2">
+          <text>"AUTO_APPROVE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="Rule_7_fallback">
+        <inputEntry id="R7_In1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R7_In2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R7_In3">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="R7_In4">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="R7_In5">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="R7_Out1">
+          <text>"MEDIUM"</text>
+        </outputEntry>
+        <outputEntry id="R7_Out2">
+          <text>"MANUAL_REVIEW"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_AssessRiskAndRouting">
+        <dc:Bounds height="80" width="220" x="160" y="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
