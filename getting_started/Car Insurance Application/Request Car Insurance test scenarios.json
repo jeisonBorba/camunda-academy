@@ -1,0 +1,693 @@
+{
+  "processId": "RequestCarInsuranceProcess",
+  "testCases": [
+    {
+      "name": "Red",
+      "instructions": [
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "variables": {
+            "experience": 1
+          }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ],
+      "metadata": {
+        "processInstanceId": 2251799813709103,
+        "coveredFlowNodes": [
+          {
+            "flowNodeId": "StartEvent_RequestReceived",
+            "elementType": "bpmn:StartEvent"
+          },
+          {
+            "flowNodeId": "Rule_Determine",
+            "elementType": "bpmn:BusinessRuleTask"
+          },
+          {
+            "flowNodeId": "Gateway_Risk",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_HighRisk",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "Gateway_12lg4gz",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_RejectRequest",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "EndEvent_RequestRejected",
+            "elementType": "bpmn:EndEvent"
+          }
+        ],
+        "coveredSequenceFlows": [
+          "requestReceived-gatewayExperience",
+          "Flow_090k59b",
+          "gatewayExperience-highRisk",
+          "highRisk-rejectRequest",
+          "Flow_0tox54m",
+          "rejectRequest-requestRejected"
+        ]
+      }
+    },
+    {
+      "name": "Green",
+      "instructions": [
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "variables": {
+            "experience": 5
+          }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ],
+      "metadata": {
+        "processInstanceId": 2251799813709178,
+        "coveredFlowNodes": [
+          {
+            "flowNodeId": "StartEvent_RequestReceived",
+            "elementType": "bpmn:StartEvent"
+          },
+          {
+            "flowNodeId": "Rule_Determine",
+            "elementType": "bpmn:BusinessRuleTask"
+          },
+          {
+            "flowNodeId": "Gateway_Risk",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_LowRisk",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "Gateway_1ypebf5",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_ApproveRequest",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "EndEvent_RequestApproved",
+            "elementType": "bpmn:EndEvent"
+          }
+        ],
+        "coveredSequenceFlows": [
+          "requestReceived-gatewayExperience",
+          "Flow_090k59b",
+          "gatewayReceived-lowRisk",
+          "lowRisk-approveRequest",
+          "Flow_0hg19id",
+          "approveRequest-requestApproved"
+        ]
+      }
+    },
+    {
+      "name": "Yellow - approved",
+      "instructions": [
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "variables": {
+            "experience": 3
+          }
+        },
+        {
+          "type": "COMPLETE_USER_TASK",
+          "userTaskSelector": {
+            "elementId": "Task_DetermineRisk"
+          },
+          "variables": {
+            "experience": "3",
+            "risk": "green"
+          }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ],
+      "metadata": {
+        "processInstanceId": 4503599627394384,
+        "coveredFlowNodes": [
+          {
+            "flowNodeId": "StartEvent_RequestReceived",
+            "elementType": "bpmn:StartEvent"
+          },
+          {
+            "flowNodeId": "Rule_Determine",
+            "elementType": "bpmn:BusinessRuleTask"
+          },
+          {
+            "flowNodeId": "Gateway_Risk",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_DetermineRisk",
+            "elementType": "bpmn:UserTask"
+          },
+          {
+            "flowNodeId": "Gateway_Decision",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Gateway_1ypebf5",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_ApproveRequest",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "EndEvent_RequestApproved",
+            "elementType": "bpmn:EndEvent"
+          }
+        ],
+        "coveredSequenceFlows": [
+          "requestReceived-gatewayExperience",
+          "Flow_090k59b",
+          "gatewayReceived-determineRisk",
+          "determineRisk-gatewayDecision",
+          "gatewayDecision-approveRequest",
+          "Flow_0hg19id",
+          "approveRequest-requestApproved"
+        ]
+      }
+    },
+    {
+      "name": "Yellow - rejected",
+      "instructions": [
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "variables": {
+            "experience": 3
+          }
+        },
+        {
+          "type": "COMPLETE_USER_TASK",
+          "userTaskSelector": {
+            "elementId": "Task_DetermineRisk"
+          },
+          "variables": {
+            "experience": "3",
+            "risk": "red"
+          }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ],
+      "metadata": {
+        "processInstanceId": 6755399441079593,
+        "coveredFlowNodes": [
+          {
+            "flowNodeId": "StartEvent_RequestReceived",
+            "elementType": "bpmn:StartEvent"
+          },
+          {
+            "flowNodeId": "Rule_Determine",
+            "elementType": "bpmn:BusinessRuleTask"
+          },
+          {
+            "flowNodeId": "Gateway_Risk",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_DetermineRisk",
+            "elementType": "bpmn:UserTask"
+          },
+          {
+            "flowNodeId": "Gateway_Decision",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Gateway_12lg4gz",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_RejectRequest",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "EndEvent_RequestRejected",
+            "elementType": "bpmn:EndEvent"
+          }
+        ],
+        "coveredSequenceFlows": [
+          "requestReceived-gatewayExperience",
+          "Flow_090k59b",
+          "gatewayReceived-determineRisk",
+          "determineRisk-gatewayDecision",
+          "gatewayDecision-rejectRequest",
+          "Flow_0tox54m",
+          "rejectRequest-requestRejected"
+        ]
+      }
+    },
+    {
+      "name": "Red - high risk car with family car type",
+      "instructions": [
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "variables": {
+            "experience": 1,
+            "carType": "family"
+          }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ],
+      "metadata": {
+        "processInstanceId": 4503599627395451,
+        "coveredFlowNodes": [
+          {
+            "flowNodeId": "StartEvent_RequestReceived",
+            "elementType": "bpmn:StartEvent"
+          },
+          {
+            "flowNodeId": "Rule_Determine",
+            "elementType": "bpmn:BusinessRuleTask"
+          },
+          {
+            "flowNodeId": "Gateway_Risk",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_HighRisk",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "Gateway_12lg4gz",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_RejectRequest",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "EndEvent_RequestRejected",
+            "elementType": "bpmn:EndEvent"
+          }
+        ],
+        "coveredSequenceFlows": [
+          "requestReceived-gatewayExperience",
+          "Flow_090k59b",
+          "gatewayExperience-highRisk",
+          "highRisk-rejectRequest",
+          "Flow_0tox54m",
+          "rejectRequest-requestRejected"
+        ]
+      }
+    },
+    {
+      "name": "Red - high risk car with luxury car type",
+      "instructions": [
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "variables": {
+            "experience": 1,
+            "carType": "luxury"
+          }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ],
+      "metadata": {
+        "processInstanceId": 2251799813710322,
+        "coveredFlowNodes": [
+          {
+            "flowNodeId": "StartEvent_RequestReceived",
+            "elementType": "bpmn:StartEvent"
+          },
+          {
+            "flowNodeId": "Rule_Determine",
+            "elementType": "bpmn:BusinessRuleTask"
+          },
+          {
+            "flowNodeId": "Gateway_Risk",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_HighRisk",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "Gateway_12lg4gz",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_RejectRequest",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "EndEvent_RequestRejected",
+            "elementType": "bpmn:EndEvent"
+          }
+        ],
+        "coveredSequenceFlows": [
+          "requestReceived-gatewayExperience",
+          "Flow_090k59b",
+          "gatewayExperience-highRisk",
+          "highRisk-rejectRequest",
+          "Flow_0tox54m",
+          "rejectRequest-requestRejected"
+        ]
+      }
+    },
+    {
+      "name": "Green - low risk car with small car type",
+      "instructions": [
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "variables": {
+            "experience": 3,
+            "carType": "small"
+          }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ],
+      "metadata": {
+        "processInstanceId": 6755399441080767,
+        "coveredFlowNodes": [
+          {
+            "flowNodeId": "StartEvent_RequestReceived",
+            "elementType": "bpmn:StartEvent"
+          },
+          {
+            "flowNodeId": "Rule_Determine",
+            "elementType": "bpmn:BusinessRuleTask"
+          },
+          {
+            "flowNodeId": "Gateway_Risk",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_LowRisk",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "Gateway_1ypebf5",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_ApproveRequest",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "EndEvent_RequestApproved",
+            "elementType": "bpmn:EndEvent"
+          }
+        ],
+        "coveredSequenceFlows": [
+          "requestReceived-gatewayExperience",
+          "Flow_090k59b",
+          "gatewayReceived-lowRisk",
+          "lowRisk-approveRequest",
+          "Flow_0hg19id",
+          "approveRequest-requestApproved"
+        ]
+      }
+    },
+    {
+      "name": "Yellow - low risk car with small car type but low experience",
+      "instructions": [
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "variables": {
+            "experience": 2,
+            "carType": "small"
+          }
+        },
+        {
+          "type": "COMPLETE_USER_TASK",
+          "userTaskSelector": {
+            "elementId": "Task_DetermineRisk"
+          },
+          "variables": {
+            "experience": "2",
+            "carType": "small",
+            "risk": "green"
+          }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ],
+      "metadata": {
+        "processInstanceId": 6755399441080826,
+        "coveredFlowNodes": [
+          {
+            "flowNodeId": "StartEvent_RequestReceived",
+            "elementType": "bpmn:StartEvent"
+          },
+          {
+            "flowNodeId": "Rule_Determine",
+            "elementType": "bpmn:BusinessRuleTask"
+          },
+          {
+            "flowNodeId": "Gateway_Risk",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_DetermineRisk",
+            "elementType": "bpmn:UserTask"
+          },
+          {
+            "flowNodeId": "Gateway_Decision",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Gateway_1ypebf5",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_ApproveRequest",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "EndEvent_RequestApproved",
+            "elementType": "bpmn:EndEvent"
+          }
+        ],
+        "coveredSequenceFlows": [
+          "requestReceived-gatewayExperience",
+          "Flow_090k59b",
+          "gatewayReceived-determineRisk",
+          "determineRisk-gatewayDecision",
+          "gatewayDecision-approveRequest",
+          "Flow_0hg19id",
+          "approveRequest-requestApproved"
+        ]
+      }
+    },
+    {
+      "name": "Green - low risk driver with luxury car type",
+      "instructions": [
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "variables": {
+            "experience": 5,
+            "carType": "luxury"
+          }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ],
+      "metadata": {
+        "processInstanceId": 2251799813710550,
+        "coveredFlowNodes": [
+          {
+            "flowNodeId": "StartEvent_RequestReceived",
+            "elementType": "bpmn:StartEvent"
+          },
+          {
+            "flowNodeId": "Rule_Determine",
+            "elementType": "bpmn:BusinessRuleTask"
+          },
+          {
+            "flowNodeId": "Gateway_Risk",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_LowRisk",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "Gateway_1ypebf5",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_ApproveRequest",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "EndEvent_RequestApproved",
+            "elementType": "bpmn:EndEvent"
+          }
+        ],
+        "coveredSequenceFlows": [
+          "requestReceived-gatewayExperience",
+          "Flow_090k59b",
+          "gatewayReceived-lowRisk",
+          "lowRisk-approveRequest",
+          "Flow_0hg19id",
+          "approveRequest-requestApproved"
+        ]
+      }
+    },
+    {
+      "name": "Yellow - low risk driver with luxury car type and low experience",
+      "instructions": [
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "variables": {
+            "experience": 4,
+            "carType": "luxury"
+          }
+        },
+        {
+          "type": "COMPLETE_USER_TASK",
+          "userTaskSelector": {
+            "elementId": "Task_DetermineRisk"
+          },
+          "variables": {
+            "experience": "4",
+            "carType": "luxury",
+            "risk": "red"
+          }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "RequestCarInsuranceProcess"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ],
+      "metadata": {
+        "processInstanceId": 2251799813710610,
+        "coveredFlowNodes": [
+          {
+            "flowNodeId": "StartEvent_RequestReceived",
+            "elementType": "bpmn:StartEvent"
+          },
+          {
+            "flowNodeId": "Rule_Determine",
+            "elementType": "bpmn:BusinessRuleTask"
+          },
+          {
+            "flowNodeId": "Gateway_Risk",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_DetermineRisk",
+            "elementType": "bpmn:UserTask"
+          },
+          {
+            "flowNodeId": "Gateway_Decision",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Gateway_12lg4gz",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Task_RejectRequest",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "EndEvent_RequestRejected",
+            "elementType": "bpmn:EndEvent"
+          }
+        ],
+        "coveredSequenceFlows": [
+          "requestReceived-gatewayExperience",
+          "Flow_090k59b",
+          "gatewayReceived-determineRisk",
+          "determineRisk-gatewayDecision",
+          "gatewayDecision-rejectRequest",
+          "Flow_0tox54m",
+          "rejectRequest-requestRejected"
+        ]
+      }
+    }
+  ]
+}

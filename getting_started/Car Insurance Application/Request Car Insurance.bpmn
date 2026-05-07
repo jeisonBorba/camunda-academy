@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_0zqvwec" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="8e7990a" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.9.0" camunda:diagramRelationId="0a956b6a-877f-4631-b234-61e2396b58f1">
+  <bpmn:process id="RequestCarInsuranceProcess" name="Request Car Insurance" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_RequestReceived" name="Request Received">
+      <bpmn:outgoing>requestReceived-gatewayExperience</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="requestReceived-gatewayExperience" sourceRef="StartEvent_RequestReceived" targetRef="Rule_Determine" />
+    <bpmn:exclusiveGateway id="Gateway_Risk" name="Risk?" default="gatewayExperience-highRisk">
+      <bpmn:incoming>Flow_090k59b</bpmn:incoming>
+      <bpmn:outgoing>gatewayExperience-highRisk</bpmn:outgoing>
+      <bpmn:outgoing>gatewayReceived-determineRisk</bpmn:outgoing>
+      <bpmn:outgoing>gatewayReceived-lowRisk</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="gatewayExperience-highRisk" name="Red" sourceRef="Gateway_Risk" targetRef="Task_HighRisk" />
+    <bpmn:sequenceFlow id="gatewayReceived-determineRisk" name="Yellow" sourceRef="Gateway_Risk" targetRef="Task_DetermineRisk">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=riskCode = "yellow"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gatewayReceived-lowRisk" name="Green" sourceRef="Gateway_Risk" targetRef="Task_LowRisk">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=riskCode = "green"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="Task_DetermineRisk" name="Determine Risk">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formId="Form_DetermineRisk" />
+        <zeebe:userTask />
+      </bpmn:extensionElements>
+      <bpmn:incoming>gatewayReceived-determineRisk</bpmn:incoming>
+      <bpmn:outgoing>determineRisk-gatewayDecision</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="highRisk-rejectRequest" sourceRef="Task_HighRisk" targetRef="Gateway_12lg4gz" />
+    <bpmn:endEvent id="EndEvent_RequestRejected" name="Request Rejected">
+      <bpmn:incoming>rejectRequest-requestRejected</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="rejectRequest-requestRejected" sourceRef="Task_RejectRequest" targetRef="EndEvent_RequestRejected" />
+    <bpmn:exclusiveGateway id="Gateway_Decision" name="Decision?">
+      <bpmn:incoming>determineRisk-gatewayDecision</bpmn:incoming>
+      <bpmn:outgoing>gatewayDecision-rejectRequest</bpmn:outgoing>
+      <bpmn:outgoing>gatewayDecision-approveRequest</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="determineRisk-gatewayDecision" sourceRef="Task_DetermineRisk" targetRef="Gateway_Decision" />
+    <bpmn:sequenceFlow id="gatewayDecision-rejectRequest" name="Rejected" sourceRef="Gateway_Decision" targetRef="Gateway_12lg4gz">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= risk = "red"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="gatewayDecision-approveRequest" name="Approved" sourceRef="Gateway_Decision" targetRef="Gateway_1ypebf5">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">= risk = "green"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="lowRisk-approveRequest" sourceRef="Task_LowRisk" targetRef="Gateway_1ypebf5" />
+    <bpmn:endEvent id="EndEvent_RequestApproved" name="Request Approved">
+      <bpmn:incoming>approveRequest-requestApproved</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="approveRequest-requestApproved" sourceRef="Task_ApproveRequest" targetRef="EndEvent_RequestApproved" />
+    <bpmn:manualTask id="Task_HighRisk" name="High Risk">
+      <bpmn:incoming>gatewayExperience-highRisk</bpmn:incoming>
+      <bpmn:outgoing>highRisk-rejectRequest</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="Task_RejectRequest" name="Reject Request">
+      <bpmn:incoming>Flow_0tox54m</bpmn:incoming>
+      <bpmn:outgoing>rejectRequest-requestRejected</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="Task_ApproveRequest" name="Approve Request">
+      <bpmn:incoming>Flow_0hg19id</bpmn:incoming>
+      <bpmn:outgoing>approveRequest-requestApproved</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:manualTask id="Task_LowRisk" name="Low Risk">
+      <bpmn:incoming>gatewayReceived-lowRisk</bpmn:incoming>
+      <bpmn:outgoing>lowRisk-approveRequest</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:exclusiveGateway id="Gateway_12lg4gz">
+      <bpmn:incoming>gatewayDecision-rejectRequest</bpmn:incoming>
+      <bpmn:incoming>highRisk-rejectRequest</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tox54m</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0tox54m" sourceRef="Gateway_12lg4gz" targetRef="Task_RejectRequest" />
+    <bpmn:exclusiveGateway id="Gateway_1ypebf5">
+      <bpmn:incoming>lowRisk-approveRequest</bpmn:incoming>
+      <bpmn:incoming>gatewayDecision-approveRequest</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hg19id</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0hg19id" sourceRef="Gateway_1ypebf5" targetRef="Task_ApproveRequest" />
+    <bpmn:businessRuleTask id="Rule_Determine" name="Determine risk">
+      <bpmn:extensionElements>
+        <zeebe:calledDecision decisionId="Decision_DetermineRisk" resultVariable="risk" />
+        <zeebe:ioMapping>
+          <zeebe:output source="=risk.code" target="riskCode" />
+          <zeebe:output source="=risk.description" target="riskDescription" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>requestReceived-gatewayExperience</bpmn:incoming>
+      <bpmn:outgoing>Flow_090k59b</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:sequenceFlow id="Flow_090k59b" sourceRef="Rule_Determine" targetRef="Gateway_Risk" />
+    <bpmn:textAnnotation id="TextAnnotation_0vipaae">
+      <bpmn:text>Determine Car Type</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_0wvo4o3" sourceRef="Task_DetermineRisk" targetRef="TextAnnotation_0vipaae" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="RequestCarInsuranceProcess">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_RequestReceived">
+        <dc:Bounds x="182" y="109" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="156" y="152" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_12e2vy7_di" bpmnElement="Gateway_Risk" isMarkerVisible="true">
+        <dc:Bounds x="535" y="102" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="496" y="145" width="28" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_193dzfg_di" bpmnElement="Task_DetermineRisk">
+        <dc:Bounds x="710" y="250" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1k15lrt_di" bpmnElement="EndEvent_RequestRejected">
+        <dc:Bounds x="1302" y="109" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1277" y="152" width="88" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1ezd9lm_di" bpmnElement="Gateway_Decision" isMarkerVisible="true">
+        <dc:Bounds x="925" y="265" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="975" y="263" width="49" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0z7nhbs_di" bpmnElement="EndEvent_RequestApproved">
+        <dc:Bounds x="1302" y="432" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1298" y="475" width="48" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_124aj39_di" bpmnElement="Task_HighRisk">
+        <dc:Bounds x="710" y="87" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_07df2mc_di" bpmnElement="Task_RejectRequest">
+        <dc:Bounds x="1090" y="87" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1pdds20_di" bpmnElement="Task_ApproveRequest">
+        <dc:Bounds x="1090" y="410" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1k9btrf_di" bpmnElement="Task_LowRisk">
+        <dc:Bounds x="710" y="410" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_12lg4gz_di" bpmnElement="Gateway_12lg4gz" isMarkerVisible="true">
+        <dc:Bounds x="925" y="102" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1ypebf5_di" bpmnElement="Gateway_1ypebf5" isMarkerVisible="true">
+        <dc:Bounds x="925" y="425" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_17ybrtm_di" bpmnElement="Rule_Determine">
+        <dc:Bounds x="310" y="87" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0vipaae_di" bpmnElement="TextAnnotation_0vipaae">
+        <dc:Bounds x="840" y="190" width="100" height="41" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1810cjm_di" bpmnElement="requestReceived-gatewayExperience">
+        <di:waypoint x="218" y="127" />
+        <di:waypoint x="310" y="127" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1277nix_di" bpmnElement="gatewayExperience-highRisk">
+        <di:waypoint x="585" y="127" />
+        <di:waypoint x="710" y="127" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="631" y="103" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_174c5bq_di" bpmnElement="gatewayReceived-determineRisk">
+        <di:waypoint x="560" y="152" />
+        <di:waypoint x="560" y="290" />
+        <di:waypoint x="710" y="290" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="575" y="203" width="32" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ibthd1_di" bpmnElement="gatewayReceived-lowRisk">
+        <di:waypoint x="560" y="152" />
+        <di:waypoint x="560" y="450" />
+        <di:waypoint x="710" y="450" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="586" y="363" width="31" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1gnbm5q_di" bpmnElement="highRisk-rejectRequest">
+        <di:waypoint x="810" y="127" />
+        <di:waypoint x="925" y="127" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0l6vxvq_di" bpmnElement="rejectRequest-requestRejected">
+        <di:waypoint x="1190" y="127" />
+        <di:waypoint x="1302" y="127" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_01evzzi_di" bpmnElement="determineRisk-gatewayDecision">
+        <di:waypoint x="810" y="290" />
+        <di:waypoint x="925" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03yoenm_di" bpmnElement="gatewayDecision-rejectRequest">
+        <di:waypoint x="950" y="265" />
+        <di:waypoint x="950" y="152" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="959" y="183" width="44" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1gu64rf_di" bpmnElement="gatewayDecision-approveRequest">
+        <di:waypoint x="950" y="315" />
+        <di:waypoint x="950" y="425" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="957" y="360" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xyq8ub_di" bpmnElement="lowRisk-approveRequest">
+        <di:waypoint x="810" y="450" />
+        <di:waypoint x="925" y="450" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10haxip_di" bpmnElement="approveRequest-requestApproved">
+        <di:waypoint x="1190" y="450" />
+        <di:waypoint x="1302" y="450" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tox54m_di" bpmnElement="Flow_0tox54m">
+        <di:waypoint x="975" y="127" />
+        <di:waypoint x="1090" y="127" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hg19id_di" bpmnElement="Flow_0hg19id">
+        <di:waypoint x="975" y="450" />
+        <di:waypoint x="1090" y="450" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_090k59b_di" bpmnElement="Flow_090k59b">
+        <di:waypoint x="410" y="127" />
+        <di:waypoint x="535" y="127" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0wvo4o3_di" bpmnElement="Association_0wvo4o3">
+        <di:waypoint x="810" y="259" />
+        <di:waypoint x="854" y="231" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

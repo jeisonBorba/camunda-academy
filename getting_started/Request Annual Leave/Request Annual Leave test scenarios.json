@@ -1,0 +1,316 @@
+{
+  "processId": "Process_0ners33",
+  "testCases": [
+    {
+      "name": "approved",
+      "instructions": [
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "Process_0ners33"
+          },
+          "variables": {
+            "name": "Jeison",
+            "startDate": "2026-04-01",
+            "endDate": "2026-04-07",
+            "leaveType": "vacation",
+            "comment": "Teste 1"
+          }
+        },
+        {
+          "type": "COMPLETE_USER_TASK",
+          "userTaskSelector": {
+            "elementId": "Activity_1nuqrfj"
+          },
+          "variables": {
+            "name": "Jeison",
+            "startDate": "2026-04-01",
+            "endDate": "2026-04-07",
+            "leaveType": "vacation",
+            "comment": "Teste 1",
+            "decision": "approved"
+          }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "Process_0ners33"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ],
+      "metadata": {
+        "processInstanceId": 6755399441057052,
+        "coveredFlowNodes": [
+          {
+            "flowNodeId": "StartEvent_1",
+            "elementType": "bpmn:StartEvent"
+          },
+          {
+            "flowNodeId": "Gateway_1kho2hq",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Activity_1nuqrfj",
+            "elementType": "bpmn:UserTask"
+          },
+          {
+            "flowNodeId": "Gateway_053l5od",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Activity_0l64616",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "Gateway_1fyb3eg",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Activity_0q2cog3",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "Event_0mb7ilx",
+            "elementType": "bpmn:EndEvent"
+          }
+        ],
+        "coveredSequenceFlows": [
+          "Flow_09fc9zx",
+          "Flow_1poy1vq",
+          "Flow_083ynsx",
+          "Flow_0cmd7xb",
+          "Flow_0vhklku",
+          "Flow_1cgf3qv",
+          "Flow_1nswti2"
+        ]
+      }
+    },
+    {
+      "name": "rejected",
+      "instructions": [
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "Process_0ners33"
+          },
+          "variables": {
+            "name": "Jeison",
+            "startDate": "2026-04-01",
+            "endDate": "2026-04-07",
+            "leaveType": "other",
+            "comment": "Teste 2"
+          }
+        },
+        {
+          "type": "COMPLETE_USER_TASK",
+          "userTaskSelector": {
+            "elementId": "Activity_1nuqrfj"
+          },
+          "variables": {
+            "name": "Jeison",
+            "startDate": "2026-04-01",
+            "endDate": "2026-04-07",
+            "leaveType": "other",
+            "comment": "Teste 2",
+            "decision": "rejected"
+          }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "Process_0ners33"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ],
+      "metadata": {
+        "processInstanceId": 2251799813686831,
+        "coveredFlowNodes": [
+          {
+            "flowNodeId": "StartEvent_1",
+            "elementType": "bpmn:StartEvent"
+          },
+          {
+            "flowNodeId": "Gateway_1kho2hq",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Activity_1nuqrfj",
+            "elementType": "bpmn:UserTask"
+          },
+          {
+            "flowNodeId": "Gateway_053l5od",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Gateway_1fyb3eg",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Activity_0q2cog3",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "Event_0mb7ilx",
+            "elementType": "bpmn:EndEvent"
+          }
+        ],
+        "coveredSequenceFlows": [
+          "Flow_09fc9zx",
+          "Flow_1poy1vq",
+          "Flow_083ynsx",
+          "Flow_1fevs2x",
+          "Flow_1cgf3qv",
+          "Flow_1nswti2"
+        ]
+      }
+    },
+    {
+      "name": "additional information with upload",
+      "instructions": [
+        {
+          "type": "CREATE_PROCESS_INSTANCE",
+          "processDefinitionSelector": {
+            "processDefinitionId": "Process_0ners33"
+          },
+          "variables": {
+            "name": "Jeison",
+            "startDate": "2026-04-01",
+            "endDate": "2026-04-07",
+            "leaveType": "vacation",
+            "comment": "Teste 3 - vacation with additional information"
+          }
+        },
+        {
+          "type": "COMPLETE_USER_TASK",
+          "userTaskSelector": {
+            "elementId": "Activity_1nuqrfj"
+          },
+          "variables": {
+            "name": "Jeison",
+            "startDate": "2026-04-01",
+            "endDate": "2026-04-07",
+            "leaveType": "vacation",
+            "comment": "Teste 3 - vacation with additional information",
+            "decision": "additional"
+          }
+        },
+        {
+          "type": "COMPLETE_USER_TASK",
+          "userTaskSelector": {
+            "elementId": "Activity_1565tvl"
+          },
+          "variables": {
+            "name": "Jeison",
+            "startDate": "2026-04-01",
+            "endDate": "2026-04-07",
+            "leaveType": "sick",
+            "comment": "Teste 3 - vacation with additional information",
+            "justify_doc": [
+              {
+                "camunda.document.type": "camunda",
+                "documentId": "9d5308fe-582e-4e1c-8ce1-28957a120213",
+                "storeId": "aws",
+                "contentHash": "0963980ca4d35842520d6eed855f2f80c08497b408c2ecb4d1ea1ec337d464b0",
+                "metadata": {
+                  "contentType": "application/pdf",
+                  "size": 195781,
+                  "fileName": "upload.pdf",
+                  "customProperties": {
+                    "pickerKey": "files::9iq6jkphyu34kkcgqtv4l94mv"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "type": "COMPLETE_USER_TASK",
+          "userTaskSelector": {
+            "elementId": "Activity_1nuqrfj"
+          },
+          "variables": {
+            "name": "Jeison",
+            "startDate": "2026-04-01",
+            "endDate": "2026-04-07",
+            "leaveType": "sick",
+            "comment": "Teste 3 - vacation with additional information",
+            "decision": "approved"
+          }
+        },
+        {
+          "type": "ASSERT_PROCESS_INSTANCE",
+          "processInstanceSelector": {
+            "processDefinitionId": "Process_0ners33"
+          },
+          "state": "IS_COMPLETED"
+        }
+      ],
+      "metadata": {
+        "processInstanceId": 4503599627372212,
+        "coveredFlowNodes": [
+          {
+            "flowNodeId": "StartEvent_1",
+            "elementType": "bpmn:StartEvent"
+          },
+          {
+            "flowNodeId": "Gateway_1kho2hq",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Activity_1nuqrfj",
+            "elementType": "bpmn:UserTask"
+          },
+          {
+            "flowNodeId": "Gateway_053l5od",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Activity_1565tvl",
+            "elementType": "bpmn:UserTask"
+          },
+          {
+            "flowNodeId": "Gateway_1kho2hq",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Activity_1nuqrfj",
+            "elementType": "bpmn:UserTask"
+          },
+          {
+            "flowNodeId": "Gateway_053l5od",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Activity_0l64616",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "Gateway_1fyb3eg",
+            "elementType": "bpmn:ExclusiveGateway"
+          },
+          {
+            "flowNodeId": "Activity_0q2cog3",
+            "elementType": "bpmn:ManualTask"
+          },
+          {
+            "flowNodeId": "Event_0mb7ilx",
+            "elementType": "bpmn:EndEvent"
+          }
+        ],
+        "coveredSequenceFlows": [
+          "Flow_09fc9zx",
+          "Flow_1jhtn6s",
+          "Flow_15gxs14",
+          "Flow_1poy1vq",
+          "Flow_083ynsx",
+          "Flow_0cmd7xb",
+          "Flow_0vhklku",
+          "Flow_1cgf3qv",
+          "Flow_1nswti2"
+        ]
+      }
+    }
+  ]
+}

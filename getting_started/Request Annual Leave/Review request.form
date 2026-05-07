@@ -1,0 +1,163 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.9.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "d9e68ce"
+  },
+  "schemaVersion": 19,
+  "id": "Form_ReviewRequest",
+  "components": [
+    {
+      "text": "## Review Request\n\nPlease review the following Annual Leave request.",
+      "type": "text",
+      "id": "Heading_leave_request",
+      "layout": {
+        "row": "row_0",
+        "col": 16
+      },
+      "properties": { }
+    },
+    {
+      "text": "#### Employee Information",
+      "type": "text",
+      "layout": {
+        "row": "Row_1warws3",
+        "columns": null
+      },
+      "id": "Field_1jlpuro"
+    },
+    {
+      "label": "Employee",
+      "type": "textfield",
+      "id": "Field_employee_name",
+      "key": "name",
+      "validate": {
+        "required": true
+      },
+      "layout": {
+        "row": "row_2",
+        "col": 8
+      },
+      "readonly": true
+    },
+    {
+      "subtype": "date",
+      "type": "datetime",
+      "id": "Field_leave_start_date",
+      "key": "startDate",
+      "dateLabel": "Start Date",
+      "validate": {
+        "required": true
+      },
+      "layout": {
+        "row": "row_2",
+        "col": 16
+      },
+      "readonly": true
+    },
+    {
+      "subtype": "date",
+      "type": "datetime",
+      "id": "Field_leave_end_date",
+      "key": "endDate",
+      "dateLabel": "End Date",
+      "validate": {
+        "required": true
+      },
+      "layout": {
+        "row": "row_2",
+        "col": 16
+      },
+      "readonly": true
+    },
+    {
+      "text": "#### Leave Type\n",
+      "type": "text",
+      "layout": {
+        "row": "Row_1s745e6",
+        "columns": null
+      },
+      "id": "Field_0pp14kv"
+    },
+    {
+      "label": "Leave Type",
+      "values": [
+        {
+          "label": "Vacation",
+          "value": "vacation"
+        },
+        {
+          "label": "Sick",
+          "value": "sick"
+        },
+        {
+          "label": "Other",
+          "value": "other"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_1rtr7cx",
+        "columns": null
+      },
+      "id": "Field_0hfo4bz",
+      "key": "leaveType",
+      "validate": {
+        "required": true
+      },
+      "readonly": true
+    },
+    {
+      "label": "Document reference",
+      "type": "documentPreview",
+      "layout": {
+        "row": "Row_1v9zb80",
+        "columns": null
+      },
+      "id": "Field_0ywvq9o",
+      "dataSource": "=justify_doc"
+    },
+    {
+      "label": "Comment",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1tugnep",
+        "columns": null
+      },
+      "id": "Field_1nmlssm",
+      "key": "comment",
+      "readonly": true
+    },
+    {
+      "label": "Decision",
+      "values": [
+        {
+          "label": "Approved",
+          "value": "approved"
+        },
+        {
+          "label": "Rejected",
+          "value": "rejected"
+        },
+        {
+          "label": "Additional Information",
+          "value": "additional"
+        }
+      ],
+      "type": "radio",
+      "layout": {
+        "row": "Row_1wstrt2",
+        "columns": null
+      },
+      "id": "Field_07nyklt",
+      "key": "decision",
+      "validate": {
+        "required": true
+      },
+      "defaultValue": "approved"
+    }
+  ],
+  "generated": true,
+  "type": "default"
+}
