@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="6a26373" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
+  <bpmn:process id="Visa-Gold-Credit-Card-KYC-application" name="Visa Gold Credit Card KYC application" isExecutable="true">
+    <bpmn:extensionElements>
+      <zeebe:versionTag value="Visa Gold Credit Card KYC application - no AO (no JSON)" />
+    </bpmn:extensionElements>
+    <bpmn:serviceTask id="Activity_ExtractKYCData" name="Extract KYC &#38; application data" zeebe:modelerTemplate="idp-unstructured-extraction-connector-5a68eaaf-844c-4e45-8d4d-9ca9f0ba51b0" zeebe:modelerTemplateVersion="4" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjE5LjE3ODkiIGhlaWdodD0iMTkuMTc4OSIgZmlsbD0id2hpdGUiIGZpbGwtb3BhY2l0eT0iMC4wMSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOm11bHRpcGx5Ii8+CjxwYXRoIGQ9Ik0xNi43ODA2IDcuMTkyMDhIMTEuOTg1OVYyLjM5NzM3SDE2Ljc4MDZWNy4xOTIwOFpNMTMuMTg0NiA1Ljk5MzRIMTUuNTgxOVYzLjU5NjA1SDEzLjE4NDZWNS45OTM0WiIgZmlsbD0iI0ZDNUQwRCIvPgo8cGF0aCBkPSJNMTAuMTg3OSA4Ljk5MDFWNS4zOTQwN0g1LjM5MzE4VjEzLjc4NDhIMTMuNzgzOVY4Ljk5MDFIMTAuMTg3OVpNNi41OTE4NiA2LjU5Mjc0SDguOTg5MjFWOC45OTAxSDYuNTkxODZWNi41OTI3NFpNOC45ODkyMSAxMi41ODYxSDYuNTkxODZWMTAuMTg4OEg4Ljk4OTIxVjEyLjU4NjFaTTEyLjU4NTIgMTIuNTg2MUgxMC4xODc5VjEwLjE4ODhIMTIuNTg1MlYxMi41ODYxWiIgZmlsbD0iI0ZDNUQwRCIvPgo8cGF0aCBkPSJNMTUuNTgxOSAxNi43ODE1SDMuNTk1MTZDMy4yNzczNyAxNi43ODExIDIuOTcyNjkgMTYuNjU0NyAyLjc0Nzk3IDE2LjQzQzIuNTIzMjYgMTYuMjA1MyAyLjM5Njg1IDE1LjkwMDYgMi4zOTY0OCAxNS41ODI4VjMuNTk2MDVDMi4zOTY4NSAzLjI3ODI1IDIuNTIzMjYgMi45NzM1NyAyLjc0Nzk3IDIuNzQ4ODZDMi45NzI2OSAyLjUyNDE0IDMuMjc3MzcgMi4zOTc3MyAzLjU5NTE2IDIuMzk3MzdIOS41ODg1NVYzLjU5NjA1SDMuNTk1MTZWMTUuNTgyOEgxNS41ODE5VjkuNTg5NDRIMTYuNzgwNlYxNS41ODI4QzE2Ljc4MDMgMTUuOTAwNiAxNi42NTM5IDE2LjIwNTMgMTYuNDI5MSAxNi40M0MxNi4yMDQ0IDE2LjY1NDcgMTUuODk5NyAxNi43ODExIDE1LjU4MTkgMTYuNzgxNVoiIGZpbGw9IiMxNjE2MTYiLz4KPC9zdmc+Cg==">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:idp-extraction-connector-template:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=kycdoc" target="input.document" />
+          <zeebe:input source="= input.extractionType" target="input.extractionType" />
+          <zeebe:input source="=[&#10;  {&#10;    &#34;prompt&#34;: &#34;It&#39;s the full name of the customer&#34;,&#10;    &#34;name&#34;: &#34;fullName&#34;&#10;  },&#10;  {&#10;    &#34;prompt&#34;: &#34;It&#39;s the date of birth of the customer&#34;,&#10;    &#34;name&#34;: &#34;dateOfBirth&#34;&#10;  },&#10;  {&#10;    &#34;prompt&#34;: &#34;It&#39;s the address of the customer&#34;,&#10;    &#34;name&#34;: &#34;address&#34;&#10;  },&#10;  {&#10;    &#34;prompt&#34;: &#34;It&#39;s the email of the customer&#34;,&#10;    &#34;name&#34;: &#34;email&#34;&#10;  },&#10;  {&#10;    &#34;prompt&#34;: &#34;It&#39;s the ID No./CR No./Registration No of the customer&#34;,&#10;    &#34;name&#34;: &#34;nationalId&#34;&#10;  },&#10;  {&#10;    &#34;prompt&#34;: &#34;It&#39;s the Employment Status&#34;,&#10;    &#34;name&#34;: &#34;employmentStatus&#34;&#10;  },&#10;  {&#10;    &#34;prompt&#34;: &#34;It&#39;s the annual income of the customer&#34;,&#10;    &#34;name&#34;: &#34;annualIncome&#34;&#10;  },&#10;  {&#10;    &#34;prompt&#34;: &#34;It&#39;s the net worth of the customer&#34;,&#10;    &#34;name&#34;: &#34;netWorth&#34;&#10;  },&#10;  {&#10;    &#34;prompt&#34;: &#34;It&#39;s the country of the customer&#34;,&#10;    &#34;name&#34;: &#34;country&#34;&#10;  },&#10;  {&#10;    &#34;prompt&#34;: &#34;It&#39;s the country code of the customer&#34;,&#10;    &#34;name&#34;: &#34;countryCode&#34;&#10;  }&#10;]" target="input.taxonomyItems" />
+          <zeebe:input source="= input.includedFields" target="input.includedFields" />
+          <zeebe:input source="= input.renameMappings" target="input.renameMappings" />
+          <zeebe:input source="= input.delimiter" target="input.delimiter" />
+          <zeebe:input source="={&#10;  &#34;modelId&#34;: &#34;anthropic.claude-sonnet-4-20250514-v1:0&#34;&#10;}" target="input.converseData" />
+          <zeebe:input source="aws" target="baseRequest.type" />
+          <zeebe:input source="credentials" target="baseRequest.authentication.type" />
+          <zeebe:input source="{{secrets.IDP_AWS_ACCESSKEY}}" target="baseRequest.authentication.accessKey" />
+          <zeebe:input source="{{secrets.IDP_AWS_SECRETKEY}}" target="baseRequest.authentication.secretKey" />
+          <zeebe:input source="{{secrets.IDP_AWS_BUCKET_NAME}}" target="baseRequest.s3BucketName" />
+          <zeebe:input source="AWS_TEXTRACT" target="baseRequest.extractionEngineType" />
+          <zeebe:input source="{{secrets.IDP_AWS_REGION}}" target="baseRequest.configuration.region" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="2" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connector.IdpExtractionOutBoundTemplate.v1" />
+          <zeebe:header key="resultExpression" value="={&#34;normalizedKycData&#34;: extractedFields}" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0gjf8z3</bpmn:incoming>
+      <bpmn:outgoing>Flow_08c56ur</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:businessRuleTask id="Activity_AssessPreliminaryEligibility" name="Assess preliminary eligibility">
+      <bpmn:extensionElements>
+        <zeebe:calledDecision decisionId="assess-preliminary-eligibility-1533s94" resultVariable="eligibilityCheck" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_08c56ur</bpmn:incoming>
+      <bpmn:outgoing>Flow_0qb91zw</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:exclusiveGateway id="Gateway_PreliminaryEligibility" name="Preliminary eligibility OK?" default="Flow_1q2fa8j">
+      <bpmn:incoming>Flow_0qb91zw</bpmn:incoming>
+      <bpmn:outgoing>Flow_1q2fa8j</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0bno19x</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Activity_ReviewKYCRisk" name="Review KYC &#38; risk">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:formDefinition formId="Form_ReviewKYCRisk" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0tlfj6o</bpmn:incoming>
+      <bpmn:outgoing>Flow_08zn7dw</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0qb91zw" sourceRef="Activity_AssessPreliminaryEligibility" targetRef="Gateway_PreliminaryEligibility" />
+    <bpmn:businessRuleTask id="Activity_AssesRisk" name="Assess risk &#38; routing">
+      <bpmn:extensionElements>
+        <zeebe:calledDecision decisionId="assess-risk-and-routing" resultVariable="riskCheck" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0c8dxd4</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ohqzt3</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:sequenceFlow id="Flow_1q2fa8j" name="no" sourceRef="Gateway_PreliminaryEligibility" targetRef="Activity_NotifyCustomerNotEligible" />
+    <bpmn:endEvent id="EndEvent_NotEligible" name="Credit card application ended (not eligible)">
+      <bpmn:incoming>Flow_0v6czp3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0v6czp3" sourceRef="Activity_NotifyCustomerNotEligible" targetRef="EndEvent_NotEligible" />
+    <bpmn:exclusiveGateway id="Gateway_RoutingDecision" name="Routing decision" default="Flow_Reject">
+      <bpmn:incoming>Flow_0ohqzt3</bpmn:incoming>
+      <bpmn:outgoing>Flow_0tlfj6o</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Reject</bpmn:outgoing>
+      <bpmn:outgoing>Flow_AutoApprove</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_0ohqzt3" sourceRef="Activity_AssesRisk" targetRef="Gateway_RoutingDecision" />
+    <bpmn:sequenceFlow id="Flow_0tlfj6o" name="Manual review" sourceRef="Gateway_RoutingDecision" targetRef="Activity_ReviewKYCRisk">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=riskCheck.routingDecision = "MANUAL_REVIEW"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:exclusiveGateway id="Gateway_ManualReviewDecision" name="Manual review decision?" default="Flow_ManualReject">
+      <bpmn:incoming>Flow_08zn7dw</bpmn:incoming>
+      <bpmn:outgoing>Flow_ManualApprove</bpmn:outgoing>
+      <bpmn:outgoing>Flow_ManualReject</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_08zn7dw" sourceRef="Activity_ReviewKYCRisk" targetRef="Gateway_ManualReviewDecision" />
+    <bpmn:exclusiveGateway id="Gateway_1plpaig">
+      <bpmn:incoming>Flow_Reject</bpmn:incoming>
+      <bpmn:incoming>Flow_ManualReject</bpmn:incoming>
+      <bpmn:outgoing>Flow_0pz8m2b</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="Gateway_0dxxp14">
+      <bpmn:incoming>Flow_AutoApprove</bpmn:incoming>
+      <bpmn:incoming>Flow_ManualApprove</bpmn:incoming>
+      <bpmn:outgoing>Flow_05u237x</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_Reject" name="Reject" sourceRef="Gateway_RoutingDecision" targetRef="Gateway_1plpaig" />
+    <bpmn:sequenceFlow id="Flow_AutoApprove" name="Auto approve" sourceRef="Gateway_RoutingDecision" targetRef="Gateway_0dxxp14">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=riskCheck.routingDecision = "AUTO_APPROVE"</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_0pz8m2b" sourceRef="Gateway_1plpaig" targetRef="Activity_NotifyCustomerRejectedRisk" />
+    <bpmn:endEvent id="EndEvent_OnboardingEndedRejectedRisk" name="Credit card application ended (risk reject)">
+      <bpmn:incoming>Flow_1jx3k1i</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_05u237x" sourceRef="Gateway_0dxxp14" targetRef="Activity_CreateCreditCardAccount" />
+    <bpmn:endEvent id="EndEvent_CustomerOnboarded" name="Credit card approved &#38; onboarded">
+      <bpmn:incoming>Flow_0m69dvc</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_ManualApprove" name="Approve" sourceRef="Gateway_ManualReviewDecision" targetRef="Gateway_0dxxp14">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=manualDecision</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_ManualReject" name="Reject" sourceRef="Gateway_ManualReviewDecision" targetRef="Gateway_1plpaig" />
+    <bpmn:scriptTask id="Activity_CreateCreditCardAccount" name="Create card account and credit limit (simulated)">
+      <bpmn:extensionElements>
+        <zeebe:script expression="={&#10;  creditLimit: productRequest.requestedLimit,&#10;  creditCardId: uuid()&#10;}" resultVariable="accountCreationResult" />
+        <zeebe:ioMapping>
+          <zeebe:output source="=accountCreationResult.creditLimit" target="creditLimit" />
+          <zeebe:output source="=accountCreationResult.creditCardId" target="creditCardId" />
+        </zeebe:ioMapping>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_05u237x</bpmn:incoming>
+    </bpmn:scriptTask>
+    <bpmn:startEvent id="StartEvent_KYCDocumentReceived" name="Credit card application received">
+      <bpmn:extensionElements>
+        <zeebe:formDefinition formId="new-banking-product" />
+      </bpmn:extensionElements>
+      <bpmn:outgoing>Flow_0gjf8z3</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0gjf8z3" sourceRef="StartEvent_KYCDocumentReceived" targetRef="Activity_ExtractKYCData" />
+    <bpmn:serviceTask id="Activity_FetchRiskScreeningData" name="Fetch risk &#38; screening data" zeebe:modelerTemplate="io.camunda.connectors.HttpJson.v2" zeebe:modelerTemplateVersion="12" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHZpZXdCb3g9IjAgMCAxOCAxOCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE3LjAzMzUgOC45OTk5N0MxNy4wMzM1IDEzLjQ0NzUgMTMuNDI4MSAxNy4wNTI5IDguOTgwNjUgMTcuMDUyOUM0LjUzMzE2IDE3LjA1MjkgMC45Mjc3NjUgMTMuNDQ3NSAwLjkyNzc2NSA4Ljk5OTk3QzAuOTI3NzY1IDQuNTUyNDggNC41MzMxNiAwLjk0NzA4MyA4Ljk4MDY1IDAuOTQ3MDgzQzEzLjQyODEgMC45NDcwODMgMTcuMDMzNSA0LjU1MjQ4IDE3LjAzMzUgOC45OTk5N1oiIGZpbGw9IiM1MDU1NjIiLz4KPHBhdGggZD0iTTQuOTMxMjYgMTQuMTU3MUw2Ljc4MTA2IDMuNzE0NzFIMTAuMTM3NUMxMS4xOTE3IDMuNzE0NzEgMTEuOTgyNCAzLjk4MzIzIDEyLjUwOTUgNC41MjAyN0MxMy4wNDY1IDUuMDQ3MzYgMTMuMzE1IDUuNzMzNTggMTMuMzE1IDYuNTc4OTJDMTMuMzE1IDcuNDQ0MTQgMTMuMDcxNCA4LjE1NTIyIDEyLjU4NDEgOC43MTIxNUMxMi4xMDY3IDkuMjU5MTMgMTEuNDU1MyA5LjYzNzA1IDEwLjYyOTggOS44NDU5TDEyLjA2MTkgMTQuMTU3MUgxMC4zMzE1TDkuMDMzNjQgMTAuMDI0OUg3LjI0MzUxTDYuNTEyNTQgMTQuMTU3MUg0LjkzMTI2Wk03LjQ5NzExIDguNTkyODFIOS4yNDI0OEM5Ljk5ODMyIDguNTkyODEgMTAuNTkwMSA4LjQyMzc0IDExLjAxNzcgOC4wODU2MUMxMS40NTUzIDcuNzM3NTMgMTEuNjc0MSA3LjI2NTEzIDExLjY3NDEgNi42Njg0MkMxMS42NzQxIDYuMTkxMDYgMTEuNTI0OSA1LjgxODExIDExLjIyNjUgNS41NDk1OUMxMC45MjgyIDUuMjcxMTMgMTAuNDU1OCA1LjEzMTkgOS44MDkzNiA1LjEzMTlIOC4xMDg3NEw3LjQ5NzExIDguNTkyODFaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:http-json:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=false" target="ignoreNullValues" />
+          <zeebe:input source="noAuth" target="authentication.type" />
+          <zeebe:input source="GET" target="method" />
+          <zeebe:input source="https://academy-dummy-rest-203366991135.europe-west1.run.app/risk-screening" target="url" />
+          <zeebe:input source="={&#34;fullName&#34;:normalizedKycData.fullName}" target="queryParameters" />
+          <zeebe:input source="=false" target="storeResponse" />
+          <zeebe:input source="=20" target="connectionTimeoutInSeconds" />
+          <zeebe:input source="=20" target="readTimeoutInSeconds" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="12" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.HttpJson.v2" />
+          <zeebe:header key="resultExpression" value="={&#10;  &#34;riskAnalysis&#34;:{&#10;  &#34;pep&#34;:body.pep,&#10;  &#34;sanctionsHit&#34;: body.sanctionsHit,&#10;  &#34;creditScore&#34;: body.creditScore,&#10;  &#34;probabilityOfDefault12m&#34;: body.probabilityOfDefault12m,&#10;  &#34;overallRiskLevel&#34;:body.overallRiskLevel,&#10;  &#34;overallRiskReason&#34;: body.overallRiskReason,&#10;  &#34;riskFactors&#34;: body.riskFactors&#10;}&#10;}" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0bno19x</bpmn:incoming>
+      <bpmn:outgoing>Flow_0c8dxd4</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Activity_NotifyCustomerNotEligible" name="Notify applicant: Credit card not eligible" zeebe:modelerTemplate="io.camunda.connectors.SendGrid.v2" zeebe:modelerTemplateVersion="5" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0wLjI4NTcwNiA1LjQwODQ3SDUuNDM4MzdWMTAuNTYxMUgwLjI4NTcwNlY1LjQwODQ3WiIgZmlsbD0id2hpdGUiLz4KICAgIDxwYXRoIGQ9Ik0wLjI4NTcwNiA1LjQwODQ3SDUuNDM4MzdWMTAuNTYxMUgwLjI4NTcwNlY1LjQwODQ3WiIgZmlsbD0iIzk5RTFGNCIvPgogICAgPHBhdGggZD0iTTUuNDM4MzcgMTAuNTYxMUwxMC41NjExIDEwLjU2MTZWMTUuNjg0NEg1LjQzODM3VjEwLjU2MTFaIiBmaWxsPSJ3aGl0ZSIvPgogICAgPHBhdGggZD0iTTUuNDM4MzcgMTAuNTYxMUwxMC41NjExIDEwLjU2MTZWMTUuNjg0NEg1LjQzODM3VjEwLjU2MTFaIiBmaWxsPSIjOTlFMUY0Ii8+CiAgICA8cGF0aCBkPSJNMC4yODU3MDYgMTUuNjg0Nkw1LjQzODM3IDE1LjY4NDRWMTUuNzE0M0gwLjI4NTcwNlYxNS42ODQ2Wk0wLjI4NTcwNiAxMC41NjE5SDUuNDM4MzdWMTUuNjg0NEwwLjI4NTcwNiAxNS42ODQ2VjEwLjU2MTlaIiBmaWxsPSIjMUE4MkUyIi8+CiAgICA8cGF0aCBkPSJNNS40MzgzNyAwLjI4NTcwNkgxMC41NjExVjUuNDA4NDdINS40MzgzN1YwLjI4NTcwNlpNMTAuNTYxNiA1LjQzODM3SDE1LjcxNDNWMTAuNTYxMUgxMC41NjE2VjUuNDM4MzdaIiBmaWxsPSIjMDBCM0UzIi8+CiAgICA8cGF0aCBkPSJNNS40MzgzNyAxMC41NjExTDEwLjU2MTEgMTAuNTYxNlY1LjQwODQ3SDUuNDM4MzdWMTAuNTYxMVoiIGZpbGw9IiMwMDlERDkiLz4KICAgIDxwYXRoIGQ9Ik0xMC41NjExIDAuMjg1NzA2SDE1LjcxNDNWNS40MDg0N0gxMC41NjExVjAuMjg1NzA2WiIgZmlsbD0iIzFBODJFMiIvPgogICAgPHBhdGggZD0iTTEwLjU2MTEgNS40MDg0N0gxNS43MTQzVjUuNDM4MzdIMTAuNTYxNkwxMC41NjExIDUuNDA4NDdaIiBmaWxsPSIjMUE4MkUyIi8+Cjwvc3ZnPg==">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:sendgrid:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="{{secrets.SENDGRID_KEY}}" target="apiKey" />
+          <zeebe:input source="Credit card application" target="from.name" />
+          <zeebe:input source="demo@camunda.com" target="from.email" />
+          <zeebe:input source="=normalizedKycData.fullName" target="to.name" />
+          <zeebe:input target="to.email" />
+          <zeebe:input source="mail" target="unMappedFieldNotUseInModel.mailType" />
+          <zeebe:input source="Credit card application: not eligible" target="content.subject" />
+          <zeebe:input source="text/plain" target="content.type" />
+          <zeebe:input source="=&#34;Hello &#34; + normalizedKycData.fullName + &#34;,\n\nYour credit card application is not eligible due to &#34; + elegibilityCheck.reasonCode + &#34;.\n\nThank you for choosing us.\n\nBest regards,\nCredit card team&#34;" target="content.value" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="5" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.SendGrid.v2" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1q2fa8j</bpmn:incoming>
+      <bpmn:outgoing>Flow_0v6czp3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_08c56ur" sourceRef="Activity_ExtractKYCData" targetRef="Activity_AssessPreliminaryEligibility" />
+    <bpmn:sequenceFlow id="Flow_0bno19x" name="yes" sourceRef="Gateway_PreliminaryEligibility" targetRef="Activity_FetchRiskScreeningData">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=eligibilityCheck.preliminaryEligibility</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:serviceTask id="Activity_NotifyCustomerRejectedRisk" name="Notify applicant: Credit card rejected (risk)" zeebe:modelerTemplate="io.camunda.connectors.SendGrid.v2" zeebe:modelerTemplateVersion="5" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0wLjI4NTcwNiA1LjQwODQ3SDUuNDM4MzdWMTAuNTYxMUgwLjI4NTcwNlY1LjQwODQ3WiIgZmlsbD0id2hpdGUiLz4KICAgIDxwYXRoIGQ9Ik0wLjI4NTcwNiA1LjQwODQ3SDUuNDM4MzdWMTAuNTYxMUgwLjI4NTcwNlY1LjQwODQ3WiIgZmlsbD0iIzk5RTFGNCIvPgogICAgPHBhdGggZD0iTTUuNDM4MzcgMTAuNTYxMUwxMC41NjExIDEwLjU2MTZWMTUuNjg0NEg1LjQzODM3VjEwLjU2MTFaIiBmaWxsPSJ3aGl0ZSIvPgogICAgPHBhdGggZD0iTTUuNDM4MzcgMTAuNTYxMUwxMC41NjExIDEwLjU2MTZWMTUuNjg0NEg1LjQzODM3VjEwLjU2MTFaIiBmaWxsPSIjOTlFMUY0Ii8+CiAgICA8cGF0aCBkPSJNMC4yODU3MDYgMTUuNjg0Nkw1LjQzODM3IDE1LjY4NDRWMTUuNzE0M0gwLjI4NTcwNlYxNS42ODQ2Wk0wLjI4NTcwNiAxMC41NjE5SDUuNDM4MzdWMTUuNjg0NEwwLjI4NTcwNiAxNS42ODQ2VjEwLjU2MTlaIiBmaWxsPSIjMUE4MkUyIi8+CiAgICA8cGF0aCBkPSJNNS40MzgzNyAwLjI4NTcwNkgxMC41NjExVjUuNDA4NDdINS40MzgzN1YwLjI4NTcwNlpNMTAuNTYxNiA1LjQzODM3SDE1LjcxNDNWMTAuNTYxMUgxMC41NjE2VjUuNDM4MzdaIiBmaWxsPSIjMDBCM0UzIi8+CiAgICA8cGF0aCBkPSJNNS40MzgzNyAxMC41NjExTDEwLjU2MTEgMTAuNTYxNlY1LjQwODQ3SDUuNDM4MzdWMTAuNTYxMVoiIGZpbGw9IiMwMDlERDkiLz4KICAgIDxwYXRoIGQ9Ik0xMC41NjExIDAuMjg1NzA2SDE1LjcxNDNWNS40MDg0N0gxMC41NjExVjAuMjg1NzA2WiIgZmlsbD0iIzFBODJFMiIvPgogICAgPHBhdGggZD0iTTEwLjU2MTEgNS40MDg0N0gxNS43MTQzVjUuNDM4MzdIMTAuNTYxNkwxMC41NjExIDUuNDA4NDdaIiBmaWxsPSIjMUE4MkUyIi8+Cjwvc3ZnPg==">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:sendgrid:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="{{secrets.SENDGRID_KEY}}" target="apiKey" />
+          <zeebe:input source="Credit card application" target="from.name" />
+          <zeebe:input source="demo@camunda.com" target="from.email" />
+          <zeebe:input source="=normalizedKycData.fullName" target="to.name" />
+          <zeebe:input target="to.email" />
+          <zeebe:input source="mail" target="unMappedFieldNotUseInModel.mailType" />
+          <zeebe:input source="Credit card application: REJECTED after risk assessment" target="content.subject" />
+          <zeebe:input source="text/plain" target="content.type" />
+          <zeebe:input source="=&#34;Hello &#34; + normalizedKycData.fullName + &#34;,\n\nYour credit card application was rejected following our risk and compliance assessment.\n\nThank you for choosing us.\n\nBest regards,\nCredit card team&#34;" target="content.value" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="5" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.SendGrid.v2" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0pz8m2b</bpmn:incoming>
+      <bpmn:outgoing>Flow_1jx3k1i</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_1jx3k1i" sourceRef="Activity_NotifyCustomerRejectedRisk" targetRef="EndEvent_OnboardingEndedRejectedRisk" />
+    <bpmn:sequenceFlow id="Flow_0625ybx" sourceRef="Activity_CreateCreditCardAccount" targetRef="Activity_1c2ku80" />
+    <bpmn:sequenceFlow id="Flow_0c8dxd4" sourceRef="Activity_FetchRiskScreeningData" targetRef="Activity_AssesRisk" />
+    <bpmn:serviceTask id="Activity_1c2ku80" name="Send credit card approval email" zeebe:modelerTemplate="io.camunda.connectors.SendGrid.v2" zeebe:modelerTemplateVersion="5" zeebe:modelerTemplateIcon="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0wLjI4NTcwNiA1LjQwODQ3SDUuNDM4MzdWMTAuNTYxMUgwLjI4NTcwNlY1LjQwODQ3WiIgZmlsbD0id2hpdGUiLz4KICAgIDxwYXRoIGQ9Ik0wLjI4NTcwNiA1LjQwODQ3SDUuNDM4MzdWMTAuNTYxMUgwLjI4NTcwNlY1LjQwODQ3WiIgZmlsbD0iIzk5RTFGNCIvPgogICAgPHBhdGggZD0iTTUuNDM4MzcgMTAuNTYxMUwxMC41NjExIDEwLjU2MTZWMTUuNjg0NEg1LjQzODM3VjEwLjU2MTFaIiBmaWxsPSJ3aGl0ZSIvPgogICAgPHBhdGggZD0iTTUuNDM4MzcgMTAuNTYxMUwxMC41NjExIDEwLjU2MTZWMTUuNjg0NEg1LjQzODM3VjEwLjU2MTFaIiBmaWxsPSIjOTlFMUY0Ii8+CiAgICA8cGF0aCBkPSJNMC4yODU3MDYgMTUuNjg0Nkw1LjQzODM3IDE1LjY4NDRWMTUuNzE0M0gwLjI4NTcwNlYxNS42ODQ2Wk0wLjI4NTcwNiAxMC41NjE5SDUuNDM4MzdWMTUuNjg0NEwwLjI4NTcwNiAxNS42ODQ2VjEwLjU2MTlaIiBmaWxsPSIjMUE4MkUyIi8+CiAgICA8cGF0aCBkPSJNNS40MzgzNyAwLjI4NTcwNkgxMC41NjExVjUuNDA4NDdINS40MzgzN1YwLjI4NTcwNlpNMTAuNTYxNiA1LjQzODM3SDE1LjcxNDNWMTAuNTYxMUgxMC41NjE2VjUuNDM4MzdaIiBmaWxsPSIjMDBCM0UzIi8+CiAgICA8cGF0aCBkPSJNNS40MzgzNyAxMC41NjExTDEwLjU2MTEgMTAuNTYxNlY1LjQwODQ3SDUuNDM4MzdWMTAuNTYxMVoiIGZpbGw9IiMwMDlERDkiLz4KICAgIDxwYXRoIGQ9Ik0xMC41NjExIDAuMjg1NzA2SDE1LjcxNDNWNS40MDg0N0gxMC41NjExVjAuMjg1NzA2WiIgZmlsbD0iIzFBODJFMiIvPgogICAgPHBhdGggZD0iTTEwLjU2MTEgNS40MDg0N0gxNS43MTQzVjUuNDM4MzdIMTAuNTYxNkwxMC41NjExIDUuNDA4NDdaIiBmaWxsPSIjMUE4MkUyIi8+Cjwvc3ZnPg==">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:sendgrid:1" retries="3" />
+        <zeebe:ioMapping>
+          <zeebe:input source="{{secrets.SENDGRID_KEY}}" target="apiKey" />
+          <zeebe:input source="Credit card application" target="from.name" />
+          <zeebe:input source="demo@camunda.com" target="from.email" />
+          <zeebe:input source="=normalizedKycData.fullName" target="to.name" />
+          <zeebe:input target="to.email" />
+          <zeebe:input source="mail" target="unMappedFieldNotUseInModel.mailType" />
+          <zeebe:input source="Your credit card has been approved" target="content.subject" />
+          <zeebe:input source="text/plain" target="content.type" />
+          <zeebe:input source="=&#34;Hello &#34; + normalizedKycData.fullName + &#34;,\n\nWe are pleased to inform you that your product request &#34; + creditCardId + &#34; has been approved with a credit limit of: &#34; + string(creditLimit) + &#34;.\n\nYou will receive your card shortly. Once it arrives, please follow the instructions to activate it and set your PIN in our online banking or mobile app.\n\nThank you for choosing us.\n\nBest regards,\nCredit card team&#34;" target="content.value" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="elementTemplateVersion" value="5" />
+          <zeebe:header key="elementTemplateId" value="io.camunda.connectors.SendGrid.v2" />
+          <zeebe:header key="retryBackoff" value="PT0S" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0625ybx</bpmn:incoming>
+      <bpmn:outgoing>Flow_0m69dvc</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0m69dvc" sourceRef="Activity_1c2ku80" targetRef="EndEvent_CustomerOnboarded" />
+  </bpmn:process>
+  <bpmn:message id="Message_2o51p0f" name="msg_kyc-document" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Visa-Gold-Credit-Card-KYC-application">
+      <bpmndi:BPMNShape id="Activity_0lrmsi5_di" bpmnElement="Activity_ExtractKYCData">
+        <dc:Bounds x="630" y="238" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0otbmlq_di" bpmnElement="Activity_AssessPreliminaryEligibility">
+        <dc:Bounds x="790" y="238" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0rl0pib_di" bpmnElement="Gateway_PreliminaryEligibility" isMarkerVisible="true">
+        <dc:Bounds x="935" y="253" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="926" y="203" width="67" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0d24srw_di" bpmnElement="Activity_ReviewKYCRisk">
+        <dc:Bounds x="1520" y="238" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_06il0is_di" bpmnElement="Activity_AssesRisk">
+        <dc:Bounds x="1200" y="238" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_06m2pfg_di" bpmnElement="EndEvent_NotEligible">
+        <dc:Bounds x="1202" y="372" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1177" y="415" width="87" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_RoutingDecision_di" bpmnElement="Gateway_RoutingDecision" isMarkerVisible="true">
+        <dc:Bounds x="1355" y="253" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1299" y="222" width="82" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1pus55r_di" bpmnElement="Gateway_ManualReviewDecision" isMarkerVisible="true">
+        <dc:Bounds x="1655" y="253" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1725" y="268" width="72" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1plpaig_di" bpmnElement="Gateway_1plpaig" isMarkerVisible="true">
+        <dc:Bounds x="1655" y="135" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0dxxp14_di" bpmnElement="Gateway_0dxxp14" isMarkerVisible="true">
+        <dc:Bounds x="1655" y="395" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ym7z3g_di" bpmnElement="EndEvent_OnboardingEndedRejectedRisk">
+        <dc:Bounds x="2052" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2027" y="185" width="87" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_08u2bwj_di" bpmnElement="EndEvent_CustomerOnboarded">
+        <dc:Bounds x="2052" y="402" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2043" y="445" width="57" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_07j106z_di" bpmnElement="Activity_CreateCreditCardAccount">
+        <dc:Bounds x="1760" y="380" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_06ay1st_di" bpmnElement="StartEvent_KYCDocumentReceived">
+        <dc:Bounds x="522" y="260" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="514" y="303" width="54" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1g86czy_di" bpmnElement="Activity_FetchRiskScreeningData">
+        <dc:Bounds x="1030" y="238" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_047b1ko_di" bpmnElement="Activity_NotifyCustomerNotEligible">
+        <dc:Bounds x="1040" y="350" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_06qq2ur" bpmnElement="Activity_NotifyCustomerRejectedRisk">
+        <dc:Bounds x="1810" y="120" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_188l0cn" bpmnElement="Activity_1c2ku80">
+        <dc:Bounds x="1900" y="380" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0qb91zw_di" bpmnElement="Flow_0qb91zw">
+        <di:waypoint x="890" y="278" />
+        <di:waypoint x="935" y="278" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1q2fa8j_di" bpmnElement="Flow_1q2fa8j">
+        <di:waypoint x="960" y="303" />
+        <di:waypoint x="960" y="390" />
+        <di:waypoint x="1040" y="390" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="969" y="344" width="13" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0v6czp3_di" bpmnElement="Flow_0v6czp3">
+        <di:waypoint x="1140" y="390" />
+        <di:waypoint x="1202" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ohqzt3_di" bpmnElement="Flow_0ohqzt3">
+        <di:waypoint x="1300" y="278" />
+        <di:waypoint x="1355" y="278" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0tlfj6o_di" bpmnElement="Flow_0tlfj6o">
+        <di:waypoint x="1405" y="278" />
+        <di:waypoint x="1520" y="278" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1427" y="260" width="72" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_08zn7dw_di" bpmnElement="Flow_08zn7dw">
+        <di:waypoint x="1620" y="278" />
+        <di:waypoint x="1655" y="278" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16rh7pn_di" bpmnElement="Flow_Reject">
+        <di:waypoint x="1380" y="253" />
+        <di:waypoint x="1380" y="160" />
+        <di:waypoint x="1655" y="160" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1441" y="133" width="33" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jvrx4i_di" bpmnElement="Flow_AutoApprove">
+        <di:waypoint x="1380" y="303" />
+        <di:waypoint x="1380" y="420" />
+        <di:waypoint x="1655" y="420" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1425" y="393" width="65" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0pz8m2b_di" bpmnElement="Flow_0pz8m2b">
+        <di:waypoint x="1705" y="160" />
+        <di:waypoint x="1810" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05u237x_di" bpmnElement="Flow_05u237x">
+        <di:waypoint x="1705" y="420" />
+        <di:waypoint x="1760" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10o99i1_di" bpmnElement="Flow_ManualApprove">
+        <di:waypoint x="1680" y="303" />
+        <di:waypoint x="1680" y="395" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1690" y="316" width="40" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00jhg6z_di" bpmnElement="Flow_ManualReject">
+        <di:waypoint x="1680" y="253" />
+        <di:waypoint x="1680" y="185" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1693" y="216" width="33" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0gjf8z3_di" bpmnElement="Flow_0gjf8z3">
+        <di:waypoint x="558" y="278" />
+        <di:waypoint x="630" y="278" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_08c56ur_di" bpmnElement="Flow_08c56ur">
+        <di:waypoint x="730" y="278" />
+        <di:waypoint x="790" y="278" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0bno19x_di" bpmnElement="Flow_0bno19x">
+        <di:waypoint x="985" y="278" />
+        <di:waypoint x="1030" y="278" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="999" y="260" width="17" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1jx3k1i_di" bpmnElement="Flow_1jx3k1i">
+        <di:waypoint x="1910" y="160" />
+        <di:waypoint x="2052" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0625ybx_di" bpmnElement="Flow_0625ybx">
+        <di:waypoint x="1860" y="420" />
+        <di:waypoint x="1900" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0c8dxd4_di" bpmnElement="Flow_0c8dxd4">
+        <di:waypoint x="1130" y="278" />
+        <di:waypoint x="1200" y="278" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0m69dvc_di" bpmnElement="Flow_0m69dvc">
+        <di:waypoint x="2000" y="420" />
+        <di:waypoint x="2052" y="420" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,33 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "3543595"
+  },
+  "schemaVersion": 19,
+  "id": "review-visa-gold-kyc-risk-0devz15",
+  "components": [
+    {
+      "label": "Agent Analysis",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1oxz3ir",
+        "columns": null
+      },
+      "id": "Field_0ojk9gj",
+      "key": "analysisToHuman"
+    },
+    {
+      "label": "Response",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_1aimec0",
+        "columns": null
+      },
+      "id": "Field_1mfnvo0",
+      "key": "humanResponse"
+    }
+  ],
+  "type": "default"
+}

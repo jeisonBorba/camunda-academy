@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="Definitions_AssessPreliminaryEligibility" name="DRD Assess Preliminary Eligibility" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Web Modeler" exporterVersion="30fe6a4" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
+  <decision id="Decision_AssessPreliminaryEligibility" name="Assess preliminary eligibility">
+    <decisionTable id="DecisionTable_12r0pqm" hitPolicy="FIRST">
+      <input id="Input_1" label="countryCode">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>normalizedKycData.countryCode</text>
+        </inputExpression>
+      </input>
+      <input id="Input_2" label="dateOfBirth">
+        <inputExpression id="InputExpression_2" typeRef="number">
+          <text>normalizedKycData.dateOfBirth</text>
+        </inputExpression>
+      </input>
+      <input id="Input_3" label="annualIncome">
+        <inputExpression id="InputExpression_3" typeRef="number">
+          <text>normalizedKycData.annualIncome</text>
+        </inputExpression>
+      </input>
+      <input id="Input_4" label="netWorth" biodi:width="192">
+        <inputExpression id="InputExpression_4" typeRef="number">
+          <text>normalizedKycData.netWorth</text>
+        </inputExpression>
+      </input>
+      <input id="Input_5" label="employmentStatus">
+        <inputExpression id="InputExpression_5" typeRef="string">
+          <text>normalizedKycData.employmentStatus</text>
+        </inputExpression>
+      </input>
+      <input id="Input_6" label="nationalId" biodi:width="192">
+        <inputExpression id="InputExpression_6" typeRef="string">
+          <text>normalizedKycData.nationalId</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1nkawnm" label="productType">
+        <inputExpression id="LiteralExpression_18b3uer" typeRef="string">
+          <text>productRequest.productType</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0y12iyp" label="cardVariant">
+        <inputExpression id="LiteralExpression_0n62n54" typeRef="string">
+          <text>productRequest.cardVariant</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_16lqe89" label="requestedLimit">
+        <inputExpression id="LiteralExpression_1b34mh0" typeRef="number">
+          <text>productRequest.requestedLimit</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="preliminaryEligibility" name="preliminaryEligibility" typeRef="boolean" />
+      <output id="Output_2" label="reasonCode" name="reasonCode" typeRef="string" />
+      <rule id="DecisionRule_3_country_not_allowed">
+        <inputEntry id="R3_In1">
+          <text>"IR","KP","SY","CU"</text>
+        </inputEntry>
+        <inputEntry id="R3_In2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R3_In3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R3_In4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R3_In5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R3_In6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10ovvhi">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1h6n9fk">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1erro23">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="R3_Out1">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="R3_Out2">
+          <text>"COUNTRY_NOT_SUPPORTED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_4_age_below_min">
+        <inputEntry id="R4_In1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R4_In2">
+          <text>&lt; 18</text>
+        </inputEntry>
+        <inputEntry id="R4_In3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R4_In4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R4_In5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R4_In6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1t8rnyq">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0fki3q8">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1va8h40">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="R4_Out1">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="R4_Out2">
+          <text>"AGE_BELOW_MINIMUM"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_05f21r9">
+        <inputEntry id="UnaryTests_1lxwfdq">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qezarj">
+          <text>&gt; 75</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ci45st">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0eatyjz">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_160fnew">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1gtc3ui">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05ft8dx">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07b2y1q">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1o9ha85">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0v9m2fj">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0vospq1">
+          <text>"AGE_ABOVE_MAXIMUM"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_6_missing_national_id">
+        <inputEntry id="R6_In1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R6_In2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R6_In3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R6_In4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R6_In5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R6_In6">
+          <text>""</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1r74w23">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rd5r5g">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0gkv35a">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="R6_Out1">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="R6_Out2">
+          <text>"NATIONAL_ID_REQUIRED"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_7_income_too_low">
+        <inputEntry id="R7_In1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R7_In2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R7_In3">
+          <text>&lt; 30000</text>
+        </inputEntry>
+        <inputEntry id="R7_In4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R7_In5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R7_In6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0w761nz">
+          <text>"CREDIT_CARD"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zl80xn">
+          <text>"GOLD"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1om3jsk">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="R7_Out1">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="R7_Out2">
+          <text>"INCOME_BELOW_MIN_FOR_GOLD"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_8_net_worth_invalid">
+        <inputEntry id="R8_In1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R8_In2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R8_In3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R8_In4">
+          <text>&lt; 5000</text>
+        </inputEntry>
+        <inputEntry id="R8_In5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R8_In6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_02x9vw5">
+          <text>"CREDIT_CARD"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03pddnt">
+          <text>"GOLD"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vtp9n4">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="R8_Out1">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="R8_Out2">
+          <text>"NET_WORTH_TOO_LOW"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_9_employment_unsupported">
+        <inputEntry id="R9_In1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R9_In2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R9_In3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R9_In4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R9_In5">
+          <text>"Unemployed","Student"</text>
+        </inputEntry>
+        <inputEntry id="R9_In6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0kcdw08">
+          <text>"CREDIT_CARD"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jeuhax">
+          <text>"GOLD"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0n11er0">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="R9_Out1">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="R9_Out2">
+          <text>"EMPLOYMENT_STATUS_NOT_ELIGIBLE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1olvkiy">
+        <inputEntry id="UnaryTests_1792hwg">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1omm5y1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1j57h4e">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1w3o2kf">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_126159t">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ksqp8a">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wwzbpp">
+          <text>"CREDIT_CARD"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12opsei">
+          <text>"GOLD"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0mrky7x">
+          <text>&gt; annualIncome * 2</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_04xlz42">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_135894u">
+          <text>"REQUESTED_LIMIT_TOO_HIGH"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_00ost3z">
+        <inputEntry id="UnaryTests_0eryh37">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1u3m0mv">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dxhucm">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14di7wo">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1a9vb49">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08gqbqb">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ncauho">
+          <text>"CREDIT_CARD"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nmls2q">
+          <text>"GOLD"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_11m163f">
+          <text>&lt;= 0</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_11zuqvo">
+          <text>false</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1auo4c8">
+          <text>"REQUESTED_LIMIT_INVALID"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_10_ok">
+        <inputEntry id="R10_In1">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R10_In2">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R10_In3">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R10_In4">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R10_In5">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="R10_In6">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0zbmcm0">
+          <text>"CREDIT_CARD"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_07ezqwi">
+          <text>"GOLD"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_05mtj61">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="R10_Out1">
+          <text>true</text>
+        </outputEntry>
+        <outputEntry id="R10_Out2">
+          <text>"OK"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_AssessPreliminaryEligibility">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
