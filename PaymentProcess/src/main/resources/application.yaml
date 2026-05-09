@@ -1,0 +1,23 @@
+#camunda:
+#  client:
+#    mode: self-managed
+#    auth:
+#      method: none
+#    grpc-address: https://my-grpc-address
+#    rest-address: https://my-rest-address
+
+
+#camunda:
+#  client:
+#    mode: self-managed
+#    auth:
+#      method: basic
+#      username: demo
+#      password: demo
+#    grpc-address: 127.0.0.1:26500
+#    rest-address: 127.0.0.1:8080
+
+
+camunda:
+  client:
+    mode: self-managed
