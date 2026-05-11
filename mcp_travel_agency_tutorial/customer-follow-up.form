@@ -1,0 +1,97 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "3543595"
+  },
+  "schemaVersion": 19,
+  "id": "ask-other-question-10704nw",
+  "components": [
+    {
+      "text": "# Customer follow-up",
+      "type": "text",
+      "layout": {
+        "row": "Row_13p2qfo",
+        "columns": null
+      },
+      "id": "Field_0e7jetg"
+    },
+    {
+      "text": "### This is the answer to your query",
+      "type": "text",
+      "layout": {
+        "row": "Row_1pwgpmw",
+        "columns": null
+      },
+      "id": "Field_1fqc9s2"
+    },
+    {
+      "text": "=responseText",
+      "type": "text",
+      "layout": {
+        "row": "Row_1sxlu4j",
+        "columns": null
+      },
+      "id": "Field_0cdk8w8"
+    },
+    {
+      "label": "Your new query",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_0ow15um",
+        "columns": null
+      },
+      "id": "Field_1wdof3l",
+      "key": "request",
+      "description": "Feel free to update your query based on the travel agent feedback"
+    },
+    {
+      "label": "Next step",
+      "values": [
+        {
+          "label": "I still have questions",
+          "value": "notYet"
+        },
+        {
+          "label": "Thank you it's all good",
+          "value": "yes"
+        },
+        {
+          "label": "I'm disappointed",
+          "value": "no"
+        }
+      ],
+      "type": "select",
+      "layout": {
+        "row": "Row_185sgsi",
+        "columns": null
+      },
+      "id": "Field_1jaqpyp",
+      "key": "customerSatisfied"
+    },
+    {
+      "label": "View past queries",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_02j13ab",
+        "columns": 5
+      },
+      "id": "Field_1k9lu0k",
+      "key": "viewPastQueries"
+    },
+    {
+      "text": "=\"Your past queries: <br>- \" + string join(requestList, \"<br> - \")",
+      "type": "text",
+      "layout": {
+        "row": "Row_02j13ab",
+        "columns": null
+      },
+      "id": "Field_0bkl9v4",
+      "conditional": {
+        "hide": "=not(viewPastQueries)"
+      }
+    }
+  ],
+  "type": "default"
+}

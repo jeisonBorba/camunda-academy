@@ -1,0 +1,45 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "3543595"
+  },
+  "schemaVersion": 19,
+  "id": "answer-to-customer-1iw88tu",
+  "components": [
+    {
+      "text": "# Reply to Customer",
+      "type": "text",
+      "layout": {
+        "row": "Row_0f0w7mj",
+        "columns": null
+      },
+      "id": "Field_1x2nwka"
+    },
+    {
+      "label": "Customer query",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_0je42wl",
+        "columns": null
+      },
+      "id": "Field_1gurub4",
+      "key": "request",
+      "disabled": false,
+      "readonly": true
+    },
+    {
+      "label": "Your answer",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_11erm52",
+        "columns": null
+      },
+      "id": "Field_0tkrok9",
+      "key": "answer",
+      "readonly": false
+    }
+  ],
+  "type": "default"
+}

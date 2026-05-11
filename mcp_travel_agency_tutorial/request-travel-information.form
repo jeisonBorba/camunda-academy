@@ -1,0 +1,34 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "3543595"
+  },
+  "schemaVersion": 19,
+  "id": "request-sent-0lvu2vq",
+  "components": [
+    {
+      "text": "# Request Travel Information",
+      "type": "text",
+      "layout": {
+        "row": "Row_1sy3kk2",
+        "columns": null
+      },
+      "id": "Field_0y6k5oo"
+    },
+    {
+      "label": "What do you want to ask to the travel agency? ",
+      "type": "textarea",
+      "layout": {
+        "row": "Row_08uegt5",
+        "columns": null
+      },
+      "id": "Field_18mb7ef",
+      "key": "request",
+      "description": "Ask about flights, accomodations, experiences",
+      "defaultValue": "Which is the cheapest price for a flight from Madrid to Paris on 4/4/2026?"
+    }
+  ],
+  "type": "default"
+}

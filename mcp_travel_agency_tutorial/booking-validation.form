@@ -1,0 +1,408 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "3543595"
+  },
+  "schemaVersion": 19,
+  "id": "Form_booking_validation3",
+  "components": [
+    {
+      "text": "### Travel Booking Form",
+      "type": "text",
+      "id": "Heading_TravelBooking",
+      "layout": {
+        "row": "row_heading_main",
+        "col": 16
+      }
+    },
+    {
+      "text": "#### We received the following booking request",
+      "type": "text",
+      "layout": {
+        "row": "Row_0ump699",
+        "columns": 14
+      },
+      "id": "Field_0ki5o3t"
+    },
+    {
+      "label": "",
+      "components": [
+        {
+          "text": "##### Flight Booking",
+          "type": "text",
+          "id": "Subheading_FlightBooking",
+          "layout": {
+            "row": "row_subheading_flight",
+            "col": 16
+          }
+        },
+        {
+          "label": "Passenger Name",
+          "type": "textfield",
+          "id": "Field_PassengerName",
+          "key": "toolCall.params.arguments.flightPassengerName",
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_flight_1",
+            "col": 8
+          }
+        },
+        {
+          "label": "Airline",
+          "type": "textfield",
+          "id": "Field_Airline",
+          "key": "toolCall.params.arguments.flightAirline",
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_flight_1",
+            "col": 8
+          }
+        },
+        {
+          "label": "Origin",
+          "type": "textfield",
+          "id": "Field_Origin",
+          "key": "toolCall.params.arguments.flightOrigin",
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_flight_2",
+            "col": 8
+          }
+        },
+        {
+          "label": "Destination",
+          "type": "textfield",
+          "id": "Field_Destination",
+          "key": "toolCall.params.arguments.flightDestination",
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_flight_2",
+            "col": 8
+          }
+        },
+        {
+          "subtype": "date",
+          "type": "datetime",
+          "id": "Field_DepartureDate",
+          "key": "toolCall.params.arguments.flightDepartDate",
+          "dateLabel": "Departure Date",
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_flight_3",
+            "col": 8
+          }
+        },
+        {
+          "label": "Price",
+          "type": "number",
+          "id": "Field_FlightPrice",
+          "key": "toolCall.params.arguments.flightPrice",
+          "decimalDigits": 2,
+          "appearance": {
+            "prefixAdorner": "$"
+          },
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_flight_3",
+            "col": 8
+          }
+        },
+        {
+          "label": "Passenger Email",
+          "type": "textfield",
+          "id": "Field_PassengerEmail",
+          "key": "toolCall.params.arguments.flightPassengerEmail",
+          "validate": {
+            "required": true,
+            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          },
+          "layout": {
+            "row": "row_flight_4",
+            "col": 16
+          }
+        }
+      ],
+      "showOutline": true,
+      "type": "group",
+      "layout": {
+        "row": "Row_0ump699",
+        "columns": null
+      },
+      "id": "Field_199hqru",
+      "conditional": {
+        "hide": "=not(toolCall.params.name=\"book_flight\")"
+      }
+    },
+    {
+      "label": "",
+      "components": [
+        {
+          "text": "##### Hotel Booking",
+          "type": "text",
+          "id": "Subheading_HotelBooking",
+          "layout": {
+            "row": "row_subheading_hotel",
+            "col": 16
+          }
+        },
+        {
+          "label": "Guest Name",
+          "type": "textfield",
+          "id": "Field_GuestName",
+          "key": "toolCall.params.arguments.hotelGuestName",
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_hotel_1",
+            "col": 8
+          }
+        },
+        {
+          "label": "Hotel Name",
+          "type": "textfield",
+          "id": "Field_HotelName",
+          "key": "toolCall.params.arguments.hotelName",
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_hotel_1",
+            "col": 8
+          }
+        },
+        {
+          "subtype": "date",
+          "type": "datetime",
+          "id": "Field_CheckInDate",
+          "key": "toolCall.params.arguments.hotelCheckIn",
+          "dateLabel": "Check-In Date",
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_hotel_2",
+            "col": 8
+          }
+        },
+        {
+          "subtype": "date",
+          "type": "datetime",
+          "id": "Field_CheckOutDate",
+          "key": "toolCall.params.arguments.hotelCheckOut",
+          "dateLabel": "Check-Out Date",
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_hotel_2",
+            "col": 8
+          }
+        },
+        {
+          "label": "City",
+          "type": "textfield",
+          "id": "Field_HotelCity",
+          "key": "toolCall.params.arguments.hotelCity",
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_hotel_3",
+            "col": 8
+          }
+        },
+        {
+          "label": "Total Price",
+          "type": "number",
+          "id": "Field_HotelTotalPrice",
+          "key": "toolCall.params.arguments.hotelTotalPrice",
+          "decimalDigits": 2,
+          "appearance": {
+            "prefixAdorner": "$"
+          },
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_hotel_3",
+            "col": 8
+          }
+        },
+        {
+          "label": "Guest Email",
+          "type": "textfield",
+          "id": "Field_GuestEmail",
+          "key": "toolCall.params.arguments.hotelGuestEmail",
+          "validate": {
+            "required": true,
+            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          },
+          "layout": {
+            "row": "row_hotel_4",
+            "col": 16
+          }
+        }
+      ],
+      "showOutline": true,
+      "type": "group",
+      "layout": {
+        "row": "Row_0ojknk6",
+        "columns": null
+      },
+      "id": "Field_0j0fici",
+      "conditional": {
+        "hide": "=not(toolCall.params.name=\"book_hotel\")"
+      }
+    },
+    {
+      "label": "",
+      "components": [
+        {
+          "text": "##### Experience Booking",
+          "type": "text",
+          "id": "Subheading_ExperienceBooking",
+          "layout": {
+            "row": "row_subheading_experience",
+            "col": 16
+          }
+        },
+        {
+          "label": "Contact Name",
+          "type": "textfield",
+          "id": "Field_ContactName",
+          "key": "toolCall.params.arguments.experienceContactName",
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_exp_1",
+            "col": 8
+          }
+        },
+        {
+          "label": "Experience Name",
+          "type": "textfield",
+          "id": "Field_ExperienceName",
+          "key": "toolCall.params.arguments.experienceName",
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_exp_1",
+            "col": 8
+          }
+        },
+        {
+          "label": "City",
+          "type": "textfield",
+          "id": "Field_ExperienceCity",
+          "key": "toolCall.params.arguments.experienceCity",
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_exp_2",
+            "col": 8
+          }
+        },
+        {
+          "subtype": "date",
+          "type": "datetime",
+          "id": "Field_ExperienceDate",
+          "key": "toolCall.params.arguments.experienceDate",
+          "dateLabel": "Date",
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_exp_2",
+            "col": 8
+          }
+        },
+        {
+          "label": "Number of Participants",
+          "type": "number",
+          "id": "Field_NumParticipants",
+          "key": "toolCall.params.arguments.experienceParticipants",
+          "decimalDigits": 0,
+          "validate": {
+            "required": true,
+            "min": 1
+          },
+          "layout": {
+            "row": "row_exp_3",
+            "col": 8
+          }
+        },
+        {
+          "label": "Price",
+          "type": "number",
+          "id": "Field_ExperiencePrice",
+          "key": "toolCall.params.arguments.experiencePrice",
+          "decimalDigits": 2,
+          "appearance": {
+            "prefixAdorner": "$"
+          },
+          "validate": {
+            "required": true
+          },
+          "layout": {
+            "row": "row_exp_3",
+            "col": 8
+          }
+        },
+        {
+          "label": "Contact Email",
+          "type": "textfield",
+          "id": "Field_ContactEmail",
+          "key": "toolCall.params.arguments.experienceContactEmail",
+          "validate": {
+            "required": true,
+            "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+          },
+          "layout": {
+            "row": "row_exp_4",
+            "col": 16
+          }
+        }
+      ],
+      "showOutline": true,
+      "type": "group",
+      "layout": {
+        "row": "Row_09t2nkg",
+        "columns": null
+      },
+      "id": "Field_01prqc0",
+      "conditional": {
+        "hide": "=not(toolCall.params.name=\"book_experience\")"
+      }
+    },
+    {
+      "label": "Do you want to validate it?",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_0biuhww",
+        "columns": null
+      },
+      "id": "Field_1o7q659",
+      "key": "bookingValidated"
+    }
+  ],
+  "generated": true,
+  "type": "default"
+}
