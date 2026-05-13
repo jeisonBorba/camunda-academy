@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="53f4f37" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.8.0">
+  <bpmn:process id="Process_CustomerAddressVerification" name="Customer Address Verification Process" isExecutable="true">
+    <bpmn:extensionElements />
+    <bpmn:sequenceFlow id="Flow_0q51mq3" sourceRef="Activity_VerifyAddress" targetRef="Gateway_BudgetCodeOutOfDate" />
+    <bpmn:sequenceFlow id="Flow_1irq6xy" sourceRef="StartEvent_Verification" targetRef="Activity_VerifyAddress" />
+    <bpmn:serviceTask id="Activity_VerifyAddress" name="Verify Address">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="verifyAddress" />
+        <zeebe:executionListeners>
+          <zeebe:executionListener eventType="end" type="trackBudgetCode" />
+        </zeebe:executionListeners>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1irq6xy</bpmn:incoming>
+      <bpmn:outgoing>Flow_0q51mq3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:startEvent id="StartEvent_Verification" name="Verification started">
+      <bpmn:outgoing>Flow_1irq6xy</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_BudgetCodeOutOfDate" name="Budget code out of date?" default="Flow_16z7kur">
+      <bpmn:extensionElements>
+        <zeebe:executionListeners>
+          <zeebe:executionListener eventType="start" retries="" type="isBudgetCodeOutdated" />
+        </zeebe:executionListeners>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0q51mq3</bpmn:incoming>
+      <bpmn:outgoing>Flow_Yes</bpmn:outgoing>
+      <bpmn:outgoing>Flow_16z7kur</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_Yes" name="Yes" sourceRef="Gateway_BudgetCodeOutOfDate" targetRef="Activity_0pgqb29">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">=isUpdateNeeded</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="Event_0l974yq" name="Verification ended">
+      <bpmn:incoming>Flow_1v4ot3n</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_16z7kur" name="No" sourceRef="Gateway_BudgetCodeOutOfDate" targetRef="Gateway_077fqti" />
+    <bpmn:exclusiveGateway id="Gateway_077fqti">
+      <bpmn:incoming>Flow_16z7kur</bpmn:incoming>
+      <bpmn:incoming>Flow_0njpy6z</bpmn:incoming>
+      <bpmn:outgoing>Flow_1v4ot3n</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1v4ot3n" sourceRef="Gateway_077fqti" targetRef="Event_0l974yq" />
+    <bpmn:userTask id="Activity_0pgqb29" name="Update budget code">
+      <bpmn:extensionElements>
+        <zeebe:userTask />
+        <zeebe:taskListeners>
+          <zeebe:taskListener eventType="creating" type="assignTeamManager" />
+        </zeebe:taskListeners>
+        <zeebe:formDefinition formId="update-budget-code-1jxbfmh" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_Yes</bpmn:incoming>
+      <bpmn:outgoing>Flow_0njpy6z</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0njpy6z" sourceRef="Activity_0pgqb29" targetRef="Gateway_077fqti" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_CustomerAddressVerification">
+      <bpmndi:BPMNShape id="Activity_1ccsc0x_di" bpmnElement="Activity_VerifyAddress">
+        <dc:Bounds x="270" y="120" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_Verification">
+        <dc:Bounds x="152" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="126" y="185" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1bdb4ml_di" bpmnElement="Gateway_BudgetCodeOutOfDate" isMarkerVisible="true">
+        <dc:Bounds x="435" y="135" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="421" y="105" width="82" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0l974yq_di" bpmnElement="Event_0l974yq">
+        <dc:Bounds x="892" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="867" y="185" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_077fqti_di" bpmnElement="Gateway_077fqti" isMarkerVisible="true">
+        <dc:Bounds x="725" y="135" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1gufcn8" bpmnElement="Activity_0pgqb29">
+        <dc:Bounds x="550" y="120" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0q51mq3_di" bpmnElement="Flow_0q51mq3">
+        <di:waypoint x="370" y="160" />
+        <di:waypoint x="435" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1irq6xy_di" bpmnElement="Flow_1irq6xy">
+        <di:waypoint x="188" y="160" />
+        <di:waypoint x="270" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1cyst2n_di" bpmnElement="Flow_Yes">
+        <di:waypoint x="485" y="160" />
+        <di:waypoint x="550" y="160" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="501" y="142" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16z7kur_di" bpmnElement="Flow_16z7kur">
+        <di:waypoint x="460" y="185" />
+        <di:waypoint x="460" y="270" />
+        <di:waypoint x="750" y="270" />
+        <di:waypoint x="750" y="185" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="472" y="213" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1v4ot3n_di" bpmnElement="Flow_1v4ot3n">
+        <di:waypoint x="775" y="160" />
+        <di:waypoint x="892" y="160" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0njpy6z_di" bpmnElement="Flow_0njpy6z">
+        <di:waypoint x="650" y="160" />
+        <di:waypoint x="725" y="160" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
