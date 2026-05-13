@@ -1,0 +1,32 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "aeb6dcc"
+  },
+  "schemaVersion": 19,
+  "id": "update-budget-code-1jxbfmh",
+  "components": [
+    {
+      "text": "# Update the budget code",
+      "type": "text",
+      "layout": {
+        "row": "Row_1uc3jnl",
+        "columns": null
+      },
+      "id": "Field_1gve01b"
+    },
+    {
+      "label": "Budget code",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1govkqh",
+        "columns": null
+      },
+      "id": "Field_1klhgdu",
+      "key": "budgetCode"
+    }
+  ],
+  "type": "default"
+}
