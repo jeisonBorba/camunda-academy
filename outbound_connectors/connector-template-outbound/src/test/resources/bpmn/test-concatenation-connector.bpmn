@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="c70c064" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.9.0">
+  <bpmn:process id="ConnectorConcatenateTest" name="Test concatenation" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Test started">
+      <bpmn:outgoing>Flow_0q6lyxz</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0q6lyxz" sourceRef="StartEvent_1" targetRef="Activity_1fk2vyr" />
+    <bpmn:endEvent id="Event_18lpxx4" name="Start ended">
+      <bpmn:incoming>Flow_0hne3kg</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0hne3kg" sourceRef="Activity_1fk2vyr" targetRef="Event_18lpxx4" />
+    <bpmn:serviceTask id="Activity_1fk2vyr" name="Concatenate" zeebe:modelerTemplate="new-connector-template" zeebe:modelerTemplateVersion="4">
+      <bpmn:extensionElements>
+        <zeebe:taskDefinition type="io.camunda:concatenation-api:1" />
+        <zeebe:ioMapping>
+          <zeebe:input source="=input1" target="input1" />
+          <zeebe:input source="=input2" target="input2" />
+        </zeebe:ioMapping>
+        <zeebe:taskHeaders>
+          <zeebe:header key="resultVariable" value="concatenationResult" />
+        </zeebe:taskHeaders>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0q6lyxz</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hne3kg</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="ConnectorConcatenateTest">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="150" y="100" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="140" y="143" width="57" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_18lpxx4_di" bpmnElement="Event_18lpxx4">
+        <dc:Bounds x="402" y="100" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="392" y="143" width="57" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1m4zvb8_di" bpmnElement="Activity_1fk2vyr">
+        <dc:Bounds x="230" y="78" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0q6lyxz_di" bpmnElement="Flow_0q6lyxz">
+        <di:waypoint x="186" y="118" />
+        <di:waypoint x="230" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0hne3kg_di" bpmnElement="Flow_0hne3kg">
+        <di:waypoint x="330" y="118" />
+        <di:waypoint x="402" y="118" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
